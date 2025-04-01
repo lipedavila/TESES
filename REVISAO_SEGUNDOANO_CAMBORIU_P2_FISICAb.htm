@@ -53,9 +53,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
       font-size: 24px;
-      text-align: center;
     }
     .resposta-correta { background: var(--cor-correto); color: white; }
     .resposta-errada { background: var(--cor-errado); color: white; }
@@ -77,31 +75,51 @@
       text-align: center;
     }
     .oculto { display: none; }
-    /* Estilo da explicação exibida em caso de erro */
+    /* Estilos para revisão detalhada e explicações de erro */
+    .card-revisao {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
     .explicacao-erro {
       font-size: 14px;
       margin-top: 10px;
       line-height: 1.4;
-      text-align: center; /* Centraliza o texto */
+      text-align: center;
       font-weight: normal;
     }
-    /* Estilo para o botão "Próxima Pergunta" */
-    .botao-proxima {
-      margin-top: 15px;
-      padding: 10px 20px;
-      font-size: 14px;
-      cursor: pointer;
-      background-color: white;
-      color: var(--cor-errado);
-      border: 1px solid white;
-      border-radius: 5px;
-      font-weight: bold;
+    .gabarito-box {
+      background: #e8f5e9;
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin: 10px 0;
+      border: 1px solid #c8e6c9;
     }
-    .botao-proxima:hover {
-      background-color: #f5f5f5;
+    .explicacao-box {
+      background: #fff3e0;
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin: 10px 0;
+      border: 1px solid #ffe0b2;
+      line-height: 1.5;
+    }
+    .enunciado {
+      margin: 15px 0;
+      color: #333;
+      line-height: 1.5;
+    }
+    .card.resposta-errada .verso {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 15px;
+      padding-bottom: 15px;
     }
   </style>
-  <!-- Polyfill e MathJax para renderizar fórmulas matemáticas -->
+  <!-- Polyfill e MathJax para fórmulas matemáticas -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -117,7 +135,7 @@
     <div class="card" id="card1">
       <div class="frente">
         <h3>Questão 1</h3>
-        <p>( ) Em um ciclo termodinâmico, como o estado final é igual ao inicial, a variação da energia interna de um gás ideal é nula.</p>
+        <p> Em um ciclo termodinâmico, como o estado final é igual ao inicial, a variação da energia interna de um gás ideal é nula.</p>
         <div class="controles">
           <button onclick="verificarResposta(1, 'V')">V</button>
           <button onclick="verificarResposta(1, 'F')">F</button>
@@ -130,7 +148,7 @@
     <div class="card" id="card2">
       <div class="frente">
         <h3>Questão 2</h3>
-        <p>( ) Em um processo adiabático, não há transferência de calor entre o sistema e o ambiente.</p>
+        <p> Em um processo adiabático, não há transferência de calor entre o sistema e o ambiente.</p>
         <div class="controles">
           <button onclick="verificarResposta(2, 'V')">V</button>
           <button onclick="verificarResposta(2, 'F')">F</button>
@@ -143,7 +161,7 @@
     <div class="card" id="card3">
       <div class="frente">
         <h3>Questão 3</h3>
-        <p>( ) Em um processo isocórico, a pressão permanece constante, independentemente de variações na temperatura.</p>
+        <p> Em um processo isocórico, a pressão permanece constante, independentemente de variações na temperatura.</p>
         <div class="controles">
           <button onclick="verificarResposta(3, 'V')">V</button>
           <button onclick="verificarResposta(3, 'F')">F</button>
@@ -156,7 +174,7 @@
     <div class="card" id="card4">
       <div class="frente">
         <h3>Questão 4</h3>
-        <p>( ) Em uma expansão livre, o trabalho realizado é igual ao calor transferido.</p>
+        <p> Em uma expansão livre, o trabalho realizado é igual ao calor transferido.</p>
         <div class="controles">
           <button onclick="verificarResposta(4, 'V')">V</button>
           <button onclick="verificarResposta(4, 'F')">F</button>
@@ -169,7 +187,7 @@
     <div class="card" id="card5">
       <div class="frente">
         <h3>Questão 5</h3>
-        <p>( ) Em um processo isotérmico de um gás ideal, a pressão é diretamente proporcional ao volume.</p>
+        <p> Em um processo isotérmico de um gás ideal, a pressão é diretamente proporcional ao volume.</p>
         <div class="controles">
           <button onclick="verificarResposta(5, 'V')">V</button>
           <button onclick="verificarResposta(5, 'F')">F</button>
@@ -182,7 +200,7 @@
     <div class="card" id="card6">
       <div class="frente">
         <h3>Questão 6</h3>
-        <p>( ) A energia interna de um gás ideal depende unicamente da sua temperatura.</p>
+        <p> A energia interna de um gás ideal depende unicamente da sua temperatura.</p>
         <div class="controles">
           <button onclick="verificarResposta(6, 'V')">V</button>
           <button onclick="verificarResposta(6, 'F')">F</button>
@@ -195,7 +213,7 @@
     <div class="card" id="card7">
       <div class="frente">
         <h3>Questão 7</h3>
-        <p>( ) Quando um gás ideal se expande realizando trabalho, sua energia interna aumenta.</p>
+        <p> Quando um gás ideal se expande realizando trabalho, sua energia interna aumenta.</p>
         <div class="controles">
           <button onclick="verificarResposta(7, 'V')">V</button>
           <button onclick="verificarResposta(7, 'F')">F</button>
@@ -208,7 +226,7 @@
     <div class="card" id="card8">
       <div class="frente">
         <h3>Questão 8</h3>
-        <p>( ) Durante uma expansão isotérmica, se o volume aumenta, a pressão também aumenta.</p>
+        <p> Durante uma expansão isotérmica, se o volume aumenta, a pressão também aumenta.</p>
         <div class="controles">
           <button onclick="verificarResposta(8, 'V')">V</button>
           <button onclick="verificarResposta(8, 'F')">F</button>
@@ -221,7 +239,7 @@
     <div class="card" id="card9">
       <div class="frente">
         <h3>Questão 9</h3>
-        <p>( ) Em uma transformação isobárica, se o volume varia, o trabalho realizado é necessariamente nulo.</p>
+        <p> Em uma transformação isobárica, se o volume varia, o trabalho realizado é necessariamente nulo.</p>
         <div class="controles">
           <button onclick="verificarResposta(9, 'V')">V</button>
           <button onclick="verificarResposta(9, 'F')">F</button>
@@ -234,7 +252,7 @@
     <div class="card" id="card10">
       <div class="frente">
         <h3>Questão 10</h3>
-        <p>( ) Durante uma expansão adiabática, o gás perde calor para o ambiente.</p>
+        <p> Durante uma expansão adiabática, o gás perde calor para o ambiente.</p>
         <div class="controles">
           <button onclick="verificarResposta(10, 'V')">V</button>
           <button onclick="verificarResposta(10, 'F')">F</button>
@@ -247,7 +265,7 @@
     <div class="card" id="card11">
       <div class="frente">
         <h3>Questão 11</h3>
-        <p>( ) Em uma transformação isotérmica, quando o gás absorve ou libera calor, sua energia interna aumenta.</p>
+        <p> Em uma transformação isotérmica, quando o gás absorve ou libera calor, sua energia interna aumenta.</p>
         <div class="controles">
           <button onclick="verificarResposta(11, 'V')">V</button>
           <button onclick="verificarResposta(11, 'F')">F</button>
@@ -260,7 +278,7 @@
     <div class="card" id="card12">
       <div class="frente">
         <h3>Questão 12</h3>
-        <p>( ) Em uma transformação isocórica, como o volume é constante, não há trabalho realizado e a variação da energia interna é igual ao calor trocado.</p>
+        <p> Em uma transformação isocórica, como o volume é constante, não há trabalho realizado e a variação da energia interna é igual ao calor trocado.</p>
         <div class="controles">
           <button onclick="verificarResposta(12, 'V')">V</button>
           <button onclick="verificarResposta(12, 'F')">F</button>
@@ -273,7 +291,7 @@
     <div class="card" id="card13">
       <div class="frente">
         <h3>Questão 13</h3>
-        <p>( ) Em uma transformação isobárica, se houver variação de temperatura, a energia interna do gás também varia.</p>
+        <p> Em uma transformação isobárica, se houver variação de temperatura, a energia interna do gás também varia.</p>
         <div class="controles">
           <button onclick="verificarResposta(13, 'V')">V</button>
           <button onclick="verificarResposta(13, 'F')">F</button>
@@ -286,7 +304,7 @@
     <div class="card" id="card14">
       <div class="frente">
         <h3>Questão 14</h3>
-        <p>( ) Na transformação isotérmica de um gás ideal, o produto \(pV\) permanece constante durante todo o processo.</p>
+        <p> Na transformação isotérmica de um gás ideal, o produto \(pV\) permanece constante durante todo o processo.</p>
         <div class="controles">
           <button onclick="verificarResposta(14, 'V')">V</button>
           <button onclick="verificarResposta(14, 'F')">F</button>
@@ -299,7 +317,7 @@
     <div class="card" id="card15">
       <div class="frente">
         <h3>Questão 15</h3>
-        <p>( ) Em uma transformação adiabática, a variação da energia interna do gás é atribuída à transferência de calor.</p>
+        <p> Em uma transformação adiabática, a variação da energia interna do gás é atribuída à transferência de calor.</p>
         <div class="controles">
           <button onclick="verificarResposta(15, 'V')">V</button>
           <button onclick="verificarResposta(15, 'F')">F</button>
@@ -312,7 +330,7 @@
     <div class="card" id="card16">
       <div class="frente">
         <h3>Questão 16</h3>
-        <p>( ) Volumes iguais de gases diferentes, ao serem aquecidos sob pressão constante e sofrendo a mesma variação de temperatura, dilatam-se igualmente.</p>
+        <p> Volumes iguais de gases diferentes, ao serem aquecidos sob pressão constante e sofrendo a mesma variação de temperatura, dilatam-se igualmente.</p>
         <div class="controles">
           <button onclick="verificarResposta(16, 'V')">V</button>
           <button onclick="verificarResposta(16, 'F')">F</button>
@@ -325,7 +343,7 @@
     <div class="card" id="card17">
       <div class="frente">
         <h3>Questão 17</h3>
-        <p>( ) Volumes iguais de gases diferentes, nas mesmas condições de temperatura e pressão, contêm o mesmo número de moléculas.</p>
+        <p> Volumes iguais de gases diferentes, nas mesmas condições de temperatura e pressão, contêm o mesmo número de moléculas.</p>
         <div class="controles">
           <button onclick="verificarResposta(17, 'V')">V</button>
           <button onclick="verificarResposta(17, 'F')">F</button>
@@ -338,7 +356,7 @@
     <div class="card" id="card18">
       <div class="frente">
         <h3>Questão 18</h3>
-        <p>( ) Para uma dada massa de gás mantida sob pressão constante, a temperatura (em Kelvin) e o volume são diretamente proporcionais.</p>
+        <p> Para uma dada massa de gás mantida sob pressão constante, a temperatura (em Kelvin) e o volume são diretamente proporcionais.</p>
         <div class="controles">
           <button onclick="verificarResposta(18, 'V')">V</button>
           <button onclick="verificarResposta(18, 'F')">F</button>
@@ -351,7 +369,7 @@
     <div class="card" id="card19">
       <div class="frente">
         <h3>Questão 19</h3>
-        <p>( ) A quantidade de mols do gás, considerando \(V = 25\,\text{L}\), \(p = 4\,\text{atm}\), \(T = 323\,\text{K}\) e \(R = 0,0821\,\text{atm}\cdot\text{L}/(\text{mol}\cdot\text{K})\), é aproximadamente \(3,8\,\text{mol}\).</p>
+        <p> A quantidade de mols do gás, considerando \(V = 25\,\text{L}\), \(p = 4\,\text{atm}\), \(T = 323\,\text{K}\) e \(R = 0,0821\,\text{atm}\cdot\text{L}/(\text{mol}\cdot\text{K})\), é aproximadamente \(3,8\,\text{mol}\).</p>
         <div class="controles">
           <button onclick="verificarResposta(19, 'V')">V</button>
           <button onclick="verificarResposta(19, 'F')">F</button>
@@ -364,7 +382,7 @@
     <div class="card" id="card20">
       <div class="frente">
         <h3>Questão 20</h3>
-        <p>( ) Em uma expansão isobárica a \(8\,\text{atm}\), com volume final de \(40\,\text{L}\) e temperatura de \(500\,\text{K}\), o número de mols do gás é aproximadamente \(7,8\,\text{mol}\).</p>
+        <p> Em uma expansão isobárica a \(8\,\text{atm}\), com volume final de \(40\,\text{L}\) e temperatura de \(500\,\text{K}\), o número de mols do gás é aproximadamente \(7,8\,\text{mol}\).</p>
         <div class="controles">
           <button onclick="verificarResposta(20, 'V')">V</button>
           <button onclick="verificarResposta(20, 'F')">F</button>
@@ -377,7 +395,7 @@
     <div class="card" id="card21">
       <div class="frente">
         <h3>Questão 21</h3>
-        <p>( ) Em um processo adiabático, a variação da energia interna do sistema é igual ao trabalho realizado com sinal invertido (\( \Delta U = -W \)), e não há troca de calor (\( Q = 0 \)).</p>
+        <p> Em um processo adiabático, a variação da energia interna do sistema é igual ao trabalho realizado com sinal invertido (\( \Delta U = -W \)), e não há troca de calor (\( Q = 0 \)).</p>
         <div class="controles">
           <button onclick="verificarResposta(21, 'V')">V</button>
           <button onclick="verificarResposta(21, 'F')">F</button>
@@ -390,7 +408,7 @@
     <div class="card" id="card22">
       <div class="frente">
         <h3>Questão 22</h3>
-        <p>( ) Durante a compressão adiabática, o trabalho realizado sobre o gás aumenta sua energia interna, resultando em elevação da temperatura.</p>
+        <p> Durante a compressão adiabática, o trabalho realizado sobre o gás aumenta sua energia interna, resultando em elevação da temperatura.</p>
         <div class="controles">
           <button onclick="verificarResposta(22, 'V')">V</button>
           <button onclick="verificarResposta(22, 'F')">F</button>
@@ -403,7 +421,7 @@
     <div class="card" id="card23">
       <div class="frente">
         <h3>Questão 23</h3>
-        <p>( ) Em uma transformação isobárica, se o volume de um gás ideal triplica (de \(V\) para \(3V\)), a temperatura final será \(900\,\text{K}\), partindo de uma temperatura inicial de \(300\,\text{K}\).</p>
+        <p> Em uma transformação isobárica, se o volume de um gás ideal triplica (de \(V\) para \(3V\)), a temperatura final será \(900\,\text{K}\), partindo de uma temperatura inicial de \(300\,\text{K}\).</p>
         <div class="controles">
           <button onclick="verificarResposta(23, 'V')">V</button>
           <button onclick="verificarResposta(23, 'F')">F</button>
@@ -416,7 +434,7 @@
     <div class="card" id="card24">
       <div class="frente">
         <h3>Questão 24</h3>
-        <p>( ) Um balão meteorológico contendo gás hélio foi lançado com volume inicial de \(3,0\,\text{m}^3\), temperatura de \(300\,\text{K}\) e pressão interna de \(1\,\text{atm}\). Ao atingir certa altitude, explodiu quando a pressão era \(0,8\,\text{atm}\) e a temperatura \(220\,\text{K}\). Utilizando a lei dos gases ideais \( \frac{P_1V_1}{T_1} = \frac{P_2V_2}{T_2} \), o volume do balão no momento da explosão era aproximadamente \(2,75\,\text{m}^3\).</p>
+        <p> Um balão meteorológico contendo gás hélio foi lançado com volume inicial de \(3,0\,\text{m}^3\), temperatura de \(300\,\text{K}\) e pressão interna de \(1\,\text{atm}\). Ao atingir certa altitude, explodiu quando a pressão era \(0,8\,\text{atm}\) e a temperatura \(220\,\text{K}\). Utilizando a lei dos gases ideais \( \frac{P_1V_1}{T_1} = \frac{P_2V_2}{T_2} \), o volume do balão no momento da explosão era aproximadamente \(2,75\,\text{m}^3\).</p>
         <div class="controles">
           <button onclick="verificarResposta(24, 'V')">V</button>
           <button onclick="verificarResposta(24, 'F')">F</button>
@@ -429,7 +447,7 @@
     <div class="card" id="card25">
       <div class="frente">
         <h3>Questão 25</h3>
-        <p>( ) Em condições normais, a quantidade de moléculas existentes em \(1\,\text{L}\) de um gás é da ordem de \(10^9\) (um bilhão de moléculas).</p>
+        <p> Em condições normais, a quantidade de moléculas existentes em \(1\,\text{L}\) de um gás é da ordem de \(10^9\) (um bilhão de moléculas).</p>
         <div class="controles">
           <button onclick="verificarResposta(25, 'V')">V</button>
           <button onclick="verificarResposta(25, 'F')">F</button>
@@ -442,7 +460,7 @@
     <div class="card" id="card26">
       <div class="frente">
         <h3>Questão 26</h3>
-        <p>( ) O volume total ocupado pelas moléculas de um gás é desprezível em comparação ao volume do recipiente que as contém.</p>
+        <p> O volume total ocupado pelas moléculas de um gás é desprezível em comparação ao volume do recipiente que as contém.</p>
         <div class="controles">
           <button onclick="verificarResposta(26, 'V')">V</button>
           <button onclick="verificarResposta(26, 'F')">F</button>
@@ -455,7 +473,7 @@
     <div class="card" id="card27">
       <div class="frente">
         <h3>Questão 27</h3>
-        <p>( ) As interações entre as moléculas de um gás ocorrem, em geral, apenas durante as colisões.</p>
+        <p> As interações entre as moléculas de um gás ocorrem, em geral, apenas durante as colisões.</p>
         <div class="controles">
           <button onclick="verificarResposta(27, 'V')">V</button>
           <button onclick="verificarResposta(27, 'F')">F</button>
@@ -468,7 +486,7 @@
     <div class="card" id="card28">
       <div class="frente">
         <h3>Questão 28</h3>
-        <p>( ) O tempo médio de duração de uma colisão entre duas moléculas quaisquer de um gás é desprezível em relação ao intervalo de tempo médio para que elas colidam novamente com outras moléculas do gás.</p>
+        <p> O tempo médio de duração de uma colisão entre duas moléculas é desprezível em relação ao intervalo entre colisões sucessivas.</p>
         <div class="controles">
           <button onclick="verificarResposta(28, 'V')">V</button>
           <button onclick="verificarResposta(28, 'F')">F</button>
@@ -481,7 +499,7 @@
     <div class="card" id="card29">
       <div class="frente">
         <h3>Questão 29</h3>
-        <p>( ) Todas as colisões entre as moléculas de um gás, assim como as colisões com as paredes do recipiente, são consideradas perfeitamente elásticas.</p>
+        <p> Todas as colisões entre as moléculas de um gás, assim como as colisões com as paredes do recipiente, são consideradas perfeitamente elásticas.</p>
         <div class="controles">
           <button onclick="verificarResposta(29, 'V')">V</button>
           <button onclick="verificarResposta(29, 'F')">F</button>
@@ -506,7 +524,7 @@
   </audio>
 
   <script>
-    // Gabarito das 29 questões
+    // Objeto de gabarito
     const gabarito = {
       1: 'V', 2: 'V', 3: 'F', 4: 'F', 5: 'F',
       6: 'V', 7: 'F', 8: 'F', 9: 'F', 10: 'F',
@@ -516,66 +534,60 @@
       26: 'V', 27: 'V', 28: 'V', 29: 'V'
     };
 
-    // Explicações para cada questão
+    // Objeto de explicações para cada questão
     const explicacoes = {
-      1: "Em um ciclo termodinâmico, o sistema retorna ao estado inicial; assim, a variação da energia interna é zero, pois depende apenas da temperatura.",
-      2: "Num processo adiabático, não há troca de calor (Q = 0) entre o sistema e o ambiente, definindo a condição adiabática.",
-      3: "Em uma transformação isocórica, o volume permanece constante, mas a pressão pode variar com a temperatura, tornando a afirmação incorreta.",
-      4: "Na expansão livre, o sistema não realiza trabalho nem troca calor com o ambiente, logo, a afirmação é falsa.",
-      5: "Em um processo isotérmico, o produto pV é constante; portanto, se o volume aumenta, a pressão deve diminuir, não havendo proporcionalidade direta.",
-      6: "Para um gás ideal, a energia interna depende unicamente da temperatura, independentemente do volume ou da pressão.",
-      7: "Durante a expansão, se o gás realiza trabalho sem receber calor, sua energia interna diminui, contrariando a afirmação.",
-      8: "Em uma expansão isotérmica, o aumento do volume implica diminuição da pressão para manter o produto pV constante.",
-      9: "Num processo isobárico, se o volume varia, o trabalho realizado é dado por W = pΔV, que não é nulo quando há variação de volume.",
-      10: "Durante a expansão adiabática, não há troca de calor; portanto, o gás não perde calor para o ambiente.",
-      11: "Na transformação isotérmica, a temperatura e, consequentemente, a energia interna permanecem constantes, mesmo havendo troca de calor.",
-      12: "Em um processo isocórico, o trabalho é nulo, fazendo com que a variação da energia interna seja igual ao calor trocado.",
-      13: "Na transformação isobárica, a energia interna varia com a temperatura; logo, se há variação de temperatura, ela também varia.",
-      14: "Em um processo isotérmico, o produto pV se mantém constante, conforme a equação dos gases ideais (pV = nRT, com T constante).",
-      15: "Num processo adiabático, como não há transferência de calor (Q = 0), a variação da energia interna deve ser igual ao trabalho realizado (ΔU = -W).",
-      16: "Volumes iguais de gases, sob as mesmas condições de pressão e temperatura, contêm o mesmo número de moléculas, dilatando-se igualmente com a mesma variação de temperatura.",
-      17: "De acordo com a lei de Avogadro, volumes iguais de gases em mesmas condições de temperatura e pressão contêm o mesmo número de moléculas.",
-      18: "Para uma dada massa de gás sob pressão constante, a relação entre volume e temperatura (em Kelvin) é diretamente proporcional (Lei de Charles).",
-      19: "Utilizando a equação dos gases ideais (pV = nRT), o cálculo com os dados fornecidos confirma que o número de mols é aproximadamente 3,8 mol.",
-      20: "Aplicando a lei dos gases ideais em um processo isobárico com os valores informados, obtém-se aproximadamente 7,8 mol.",
-      21: "Em um processo adiabático, com Q = 0, a variação da energia interna é dada por ΔU = -W, confirmando a afirmação.",
-      22: "Durante a compressão adiabática, o trabalho realizado sobre o gás aumenta sua energia interna, elevando a temperatura.",
-      23: "Em uma transformação isobárica, V é diretamente proporcional à temperatura; triplicar o volume, partindo de 300 K, resulta em 900 K.",
-      24: "Utilizando a lei combinada dos gases (P₁V₁/T₁ = P₂V₂/T₂), o volume do balão no momento da explosão é calculado em aproximadamente 2,75 m³.",
-      25: "Em condições normais, o número de moléculas em 1 L de gás é da ordem de 10²³, e não 10⁹, tornando a afirmação falsa.",
-      26: "O volume ocupado pelas moléculas é ínfimo comparado ao volume do recipiente, podendo ser considerado desprezível.",
-      27: "Na teoria cinética dos gases, as interações entre moléculas ocorrem essencialmente durante as colisões.",
-      28: "O tempo de duração de uma colisão entre moléculas é extremamente curto em comparação com o intervalo entre colisões sucessivas.",
-      29: "No modelo dos gases ideais, todas as colisões, entre moléculas ou com as paredes do recipiente, são consideradas perfeitamente elásticas."
+      1: "Em ciclos termodinâmicos, a energia interna (U) é uma função de estado, dependendo apenas dos estados inicial e final. Como o ciclo retorna ao estado inicial, ΔU = 0. Pela 1ª Lei (ΔU = Q - W), o calor líquido é igual ao trabalho realizado. Exemplo: Ciclo de Carnot.",
+      2: "Em um processo adiabático, não há troca de calor (Q = 0). Assim, qualquer variação em U resulta do trabalho (ΔU = -W), caracterizando expansões ou compressões em isolamento térmico.",
+      3: "Em um processo isocórico, o volume é constante, portanto, o trabalho é zero. Contudo, a pressão pode variar com a temperatura, conforme a equação de estado dos gases ideais.",
+      4: "Na expansão livre, o gás não realiza trabalho e não troca calor, logo ΔU = 0. A afirmação relaciona trabalho e calor de forma equivocada.",
+      5: "Em um processo isotérmico, a temperatura é constante, logo U permanece constante. A relação entre pressão e volume é inversa (Lei de Boyle), e não direta.",
+      6: "A energia interna de um gás ideal depende apenas da temperatura, pois a energia cinética média das moléculas é função exclusiva da temperatura.",
+      7: "Quando um gás ideal se expande realizando trabalho, sua energia interna diminui, pois parte da energia interna é gasta no trabalho realizado.",
+      8: "Durante uma expansão isotérmica, se o volume aumenta, a pressão diminui, de acordo com a Lei de Boyle (pV = constante).",
+      9: "Em uma transformação isobárica, o trabalho é dado por W = pΔV. Se o volume varia, o trabalho não é zero.",
+      10: "Em uma expansão adiabática, como Q = 0, a variação de U é dada pelo trabalho realizado. A afirmação de que o gás perde calor está incorreta.",
+      11: "Em uma transformação isotérmica, a temperatura e, portanto, U permanecem constantes, mesmo com absorção ou liberação de calor.",
+      12: "Em uma transformação isocórica, não há trabalho (W = 0) e ΔU é igual ao calor trocado (ΔU = Q).",
+      13: "Em uma transformação isobárica, a variação de U depende apenas da variação de temperatura, não diretamente do volume, embora o trabalho seja pΔV.",
+      14: "Na transformação isotérmica de um gás ideal, o produto pV é constante, conforme a Lei de Boyle para temperatura constante.",
+      15: "Em uma transformação adiabática, como Q = 0, ΔU é determinado pelo trabalho realizado. A afirmação sugere transferência de calor, o que é incorreto.",
+      16: "Volumes iguais de gases diferentes podem ter coeficientes de expansão distintos; nem todos dilatam igualmente sob pressão constante.",
+      17: "Segundo a Lei de Avogadro, volumes iguais de gases, nas mesmas condições, contêm o mesmo número de moléculas.",
+      18: "Para uma dada massa de gás sob pressão constante, o volume é diretamente proporcional à temperatura (Lei de Charles).",
+      19: "Usando n = pV/(RT) com os valores fornecidos, obtém-se aproximadamente 3,8 mol.",
+      20: "Aplicando a equação dos gases ideais com p = 8 atm, V = 40 L, T = 500 K, calcula-se aproximadamente 7,8 mol.",
+      21: "Em processos adiabáticos, como Q = 0, a variação de U é igual a -W, ou seja, ΔU = -W.",
+      22: "Durante a compressão adiabática, o trabalho realizado aumenta U, elevando a temperatura do gás.",
+      23: "Se o volume triplica em uma transformação isobárica, pela relação V1/T1 = V2/T2, com T1 = 300 K, T2 será 900 K.",
+      24: "Aplicando a lei dos gases ideais e considerando as variações de pressão e temperatura, o cálculo indica que o volume era aproximadamente 2,75 m³.",
+      25: "Em condições normais, 1 L de gás contém da ordem de 10^19 moléculas, não 10^9. Assim, a afirmação está incorreta.",
+      26: "O volume ocupado pelas moléculas é insignificante comparado ao volume total do recipiente, devido à baixa densidade das moléculas.",
+      27: "No gás ideal, as interações ocorrem principalmente durante colisões, pois as forças intermoleculares são desprezíveis fora desses eventos.",
+      28: "O tempo de duração de uma colisão é extremamente curto comparado ao intervalo entre elas, permitindo tratar as colisões como instantâneas.",
+      29: "A teoria cinética assume que todas as colisões, entre moléculas e com as paredes, são perfeitamente elásticas, mantendo constante a energia cinética total."
     };
 
     let pontuacao = 0;
-    let erros = []; // Guarda o número das questões erradas
-    let erroMode = false; // Indica se está no modo de refazer erros
-    let errosRedo = [];  // Array com as questões a refazer
-    let erroIndex = 0;   // Índice atual no modo de erros
+    let erros = [];
+    let erroMode = false;
+    let errosRedo = [];
+    let erroIndex = 0;
 
-    // Função para verificar a resposta e exibir a explicação se estiver errada
     function verificarResposta(numPergunta, resposta) {
       const card = document.getElementById(`card${numPergunta}`);
       const verso = card.querySelector('.verso');
 
       if (resposta === gabarito[numPergunta]) {
         card.classList.add('resposta-correta');
-        verso.textContent = '✓';
+        verso.innerHTML = '✓';
         pontuacao++;
         document.getElementById('somCorreto').play();
-        // Avança automaticamente se a resposta estiver correta
+        // Se estiver correto, avançamos automaticamente após 1500 ms
         setTimeout(() => mostrarProximaPergunta(numPergunta), 1500);
       } else {
         card.classList.add('resposta-errada');
-        verso.innerHTML = `
-            ✗<br>
-            <div class="explicacao-erro">${explicacoes[numPergunta]}</div>
-            <button class="botao-proxima" onclick="mostrarProximaPergunta(${numPergunta})">
-                Próxima Pergunta &gt;
-            </button>
-        `;
+        // Exibe o símbolo de erro, a explicação e um botão para avançar
+        verso.innerHTML = '✗<br><div class="explicacao-erro">' + explicacoes[numPergunta] + '</div><br><button onclick="mostrarProximaPergunta(' + numPergunta + ')">Avançar</button>';
         document.getElementById('somErrado').play();
         if (!erroMode && !erros.includes(numPergunta)) {
           erros.push(numPergunta);
@@ -585,13 +597,11 @@
       atualizarPontuacao();
     }
 
-    // Atualiza a exibição da pontuação
     function atualizarPontuacao() {
       let total = erroMode ? errosRedo.length : 29;
       document.getElementById('pontuacao').textContent = `Pontuação: ${pontuacao}/${total}`;
     }
 
-    // Exibe a próxima questão (ou o card final, se terminar)
     function mostrarProximaPergunta(atual) {
       if (!erroMode) {
         document.getElementById(`card${atual}`).classList.add('oculto');
@@ -611,13 +621,10 @@
       }
     }
 
-    // Mostra o card final com a mensagem, a nota e os botões de ação
     function mostrarResultadoFinal() {
-      // Oculta todas as questões
       for (let i = 1; i <= 29; i++) {
         document.getElementById(`card${i}`).classList.add('oculto');
       }
-      // Calcula a nota com base no total de questões dessa rodada
       let total = erroMode ? errosRedo.length : 29;
       let nota = (pontuacao / total) * 10;
       let finalCard = document.getElementById('cardFinal');
@@ -625,66 +632,72 @@
         <h3>Parabéns, você concluiu sua revisão!</h3>
         <p>Sua nota final: ${nota.toFixed(1)}</p>
         <div class="controles">
-          <button onclick="refazerErros()">Refazer questões que eu errei</button>
-          <button onclick="recomecarRevisao()">Recomeçar revisão</button>
-          <button onclick="exibirRevisaoComGabarito()">Exibir revisão com gabarito</button>
+          <button onclick="refazerErros()">Refazer questões erradas (${erros.length})</button>
+          <button onclick="recomecarRevisao()">Novo teste completo</button>
+          <button onclick="exibirRevisaoComGabarito()">Ver revisão detalhada</button>
         </div>
       `;
       finalCard.classList.remove('oculto');
     }
 
-    // Reinicia toda a revisão
     function recomecarRevisao() {
       location.reload();
     }
 
-    // Prepara e exibe apenas as questões que foram erradas para reattempt
     function refazerErros() {
       if (erros.length === 0) {
         alert("Você não errou nenhuma questão!");
         return;
       }
       erroMode = true;
-      // Reinicia a pontuação para essa rodada
       pontuacao = 0;
-      // Ordena os números das questões erradas
       errosRedo = erros.slice().sort((a, b) => a - b);
       erroIndex = 0;
-      // Oculta todos os cards
       for (let i = 1; i <= 29; i++) {
         document.getElementById(`card${i}`).classList.add('oculto');
       }
-      // Reseta os cards das questões erradas
       errosRedo.forEach(num => {
         let card = document.getElementById(`card${num}`);
         card.classList.remove('flipped', 'resposta-correta', 'resposta-errada', 'oculto');
         let verso = card.querySelector('.verso');
         verso.innerHTML = "";
       });
-      // Oculta o card final
       document.getElementById('cardFinal').classList.add('oculto');
       atualizarPontuacao();
-      // Exibe o primeiro card da lista de erros
       document.getElementById(`card${errosRedo[erroIndex]}`).classList.remove('oculto');
     }
 
-    // Exibe uma tela com todas as questões, suas respostas corretas e a explicação correspondente
     function exibirRevisaoComGabarito() {
       let container = document.querySelector('.container');
-      let reviewHTML = `<h2>Revisão com Gabarito</h2>`;
+      container.innerHTML = `
+        <h1>Revisão Completa com Explicações</h1>
+        <button onclick="recomecarRevisao()" style="margin: 20px 0">Voltar ao Quiz</button>
+      `;
       for (let i = 1; i <= 29; i++) {
-        // Obtém o texto da questão a partir do card (mesmo que esteja oculto)
         let card = document.getElementById(`card${i}`);
+        let questionText = '';
         if (card) {
-          let questionText = card.querySelector('.frente p').innerHTML;
-          reviewHTML += `<div style="border:1px solid #ccc; border-radius:8px; padding:10px; margin-bottom:10px;">
-                           <p><strong>Questão ${i}:</strong> ${questionText}</p>
-                           <p><em>Resposta correta: ${gabarito[i]}</em></p>
-                           <div class="explicacao-erro">${explicacoes[i]}</div>
-                         </div>`;
+          let pElement = card.querySelector('.frente p');
+          if (pElement) {
+            questionText = pElement.innerHTML;
+          }
         }
+        container.innerHTML += `
+          <div class="card-revisao">
+            <h3>Questão ${i}</h3>
+            <div class="enunciado">${questionText}</div>
+            <div class="gabarito-box">
+              <strong>Resposta correta:</strong> ${gabarito[i]}
+            </div>
+            <div class="explicacao-box">
+              <strong>Explicação:</strong> ${explicacoes[i]}
+            </div>
+          </div>
+        `;
       }
-      container.innerHTML = reviewHTML;
+      if (window.MathJax) {
+        MathJax.typesetPromise();
+      }
     }
 
     // Inicializa: mostra apenas o primeiro card
