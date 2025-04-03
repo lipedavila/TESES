@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEBUG: Termodinâmica Interativa | Com Felipe d'Avila</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ESTILOS CSS (Mantidos da versão anterior, exceto transições de hide/show) */
+        :root {
+            --primary-color: #6a11cb; --secondary-color: #2575fc; --accent-color: #ffdd57;
+            --text-light: #f8f9fa; --text-dark: #212529; --card-bg: rgba(15, 15, 25, 0.85);
+            --iframe-height: 70vh;
+        }
+        body { margin: 0; padding: 0; overflow-x: hidden; overflow-y: auto; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; padding-top: 40px; padding-bottom: 80px; }
+        .loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease-out, visibility 0.6s ease-out; opacity: 1; visibility: visible; z-index: 10000; }
+        .loader.hidden { opacity: 0; visibility: hidden; }
+        .loader-spinner { border: 5px solid #f3f3f3; border-top: 5px solid var(--primary-color); border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .main-content-area { position: relative; z-index: 1; text-align: center; padding: 20px; max-width: 1100px; width: 95%; }
+        .card-container { background: var(--card-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 20px; padding: 40px 30px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-light); }
+        .header h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: 10px; color: var(--text-light); text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .header .instructor-line { font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 600; color: var(--accent-color); margin-bottom: 20px; letter-spacing: 1px; }
+        .header .instructor-line span { font-weight: 700; text-shadow: 0 0 5px rgba(255, 221, 87, 0.5); }
+        .header p.description { font-size: clamp(0.9rem, 2vw, 1rem); font-weight: 300; color: rgba(248, 249, 250, 0.9); margin: 0 auto 30px auto; max-width: 85%; line-height: 1.6; }
+        #initial-choice { /* Não precisa mais de transição aqui */ }
+        .button-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; margin-top: 1rem; }
+        .btn-custom { padding: 15px 30px; font-size: clamp(1rem, 2.5vw, 1.1rem); font-weight: 600; border-radius: 50px; border: none; transition: all 0.35s ease; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; min-width: 260px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); position: relative; overflow: hidden; color: white; cursor: pointer; }
+        .btn-custom i { margin-right: 12px; font-size: 1.3em; }
+        .btn-aula { background: linear-gradient(45deg, var(--secondary-color), #4e8dff); }
+        .btn-revisao { background: linear-gradient(45deg, var(--primary-color), #9b59b6); }
+        .btn-custom:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); color: white; }
+        .btn-custom::before { content: ''; position: absolute; top: 0; left: -75%; width: 50%; height: 100%; background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%); transform: skewX(-25deg); transition: left 0.5s ease; }
+        .btn-custom:hover::before { left: 125%; }
+        .fact-boxes { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 2.5rem; justify-content: center; }
+        .fact-box { background-color: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; flex: 1 1 300px; min-width: 280px; max-width: 400px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); border-left: 4px solid var(--accent-color); text-align: left; color: var(--text-light); transition: transform 0.3s ease; }
+        .fact-box:hover { transform: translateY(-3px); }
+        .fact-box h3 { font-size: 1.2rem; color: var(--accent-color); margin-bottom: 0.8rem; font-weight: 600; }
+        .fact-box h3 i { margin-right: 8px; }
+        .fact-box p { font-size: 0.95rem; color: rgba(248, 249, 250, 0.85); line-height: 1.6; }
+        #content-display { width: 100%; margin-top: 1rem; display: none; /* Começa oculto */ }
+        #content-frame { width: 100%; height: var(--iframe-height); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 15px; background-color: rgba(255, 255, 255, 0.95); }
+        #switch-button-area { margin-top: 1.5rem; text-align: center; display: none; /* Começa oculto */ }
+        #switch-content-btn { background: linear-gradient(45deg, var(--accent-color), #f7ca18); color: var(--text-dark); padding: 12px 25px; min-width: 280px; font-size: clamp(1rem, 2.5vw, 1.1rem); font-weight: 600; border-radius: 50px; border: none; transition: all 0.35s ease; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); position: relative; overflow: hidden; cursor: pointer; }
+        #switch-content-btn:hover { background: linear-gradient(45deg, #f7ca18, var(--accent-color)); color: var(--text-dark); transform: translateY(-5px) scale(1.03); box-shadow: 0 10px 25px rgba(255, 221, 87, 0.4); }
+        #switch-content-btn i { margin-right: 10px; font-size: 1.2em; }
+        .footer { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 10, 20, 0.8); backdrop-filter: blur(5px); padding: 10px 0; text-align: center; color: var(--text-light); font-size: clamp(0.85rem, 2.5vw, 1rem); text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); z-index: 100; }
+        .footer span { font-weight: bold; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px; animation: glow 2.5s infinite ease-in-out; }
+        @keyframes glow { 0%, 100% { text-shadow: 0 0 8px var(--accent-color), 0 0 12px rgba(255, 221, 87, 0.5); } 50% { text-shadow: 0 0 15px var(--accent-color), 0 0 25px rgba(255, 221, 87, 0.7); } }
+        @media (max-width: 768px) { body { padding-top: 20px; padding-bottom: 70px; } .card-container { padding: 30px 15px; } .btn-custom { width: 90%; max-width: 300px; } .fact-boxes { margin-top: 2rem; } :root { --iframe-height: 65vh; } #switch-content-btn { width: 90%; max-width: 300px;} }
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader"> <div class="loader-spinner"></div> </div>
+
+    <div id="particles-js"></div>
+
+    <div class="main-content-area">
+        <div class="card-container">
+            <div class="header">
+                <h1 class="animate__animated animate__fadeInDown">Transformações Gasosas e 1ª Lei da Termodinâmica</h1>
+                <div class="instructor-line animate__animated animate__fadeInDown animate__delay-1s">
+                    Com <span>Felipe d'Avila</span>
+                </div>
+            </div>
+
+            <div id="initial-choice" class="animate__animated animate__fadeInUp animate__delay-1s">
+                 <p class="description">
+                    Explore os princípios fundamentais que regem o comportamento dos gases e a conservação de energia. Escolha como você quer aprender hoje!
+                </p>
+                <div class="button-container">
+                    <button id="btn-aula" data-url="https://rawcdn.githack.com/lipedavila/TESES/refs/heads/main/termodinamica.htm" class="btn btn-custom btn-aula">
+                        <i class="fas fa-play-circle"></i> Ver Aula Completa
+                    </button>
+                    <button id="btn-revisao" data-url="https://raw.githack.com/lipedavila/TESES/refs/heads/main/REVISAO_SEGUNDOANO_CAMBORIU_P2_FISICAb.htm" class="btn btn-custom btn-revisao">
+                        <i class="fas fa-list-check"></i> Responder Lista de Revisão
+                    </button>
+                </div>
+                <div class="fact-boxes">
+                     <div class="fact-box"><h3><i class="fas fa-fire-alt"></i> Primeira Lei</h3><p>ΔU = Q - W. A variação da energia interna é o calor adicionado menos o trabalho realizado.</p></div>
+                     <div class="fact-box"><h3><i class="fas fa-arrows-alt-h"></i> Transformações</h3><p>Isotérmica (T cte), Isobárica (P cte), Isocórica (V cte) e Adiabática (Q=0).</p></div>
+                </div>
+            </div>
+
+            <div id="content-display">
+                <iframe id="content-frame" src="about:blank" frameborder="0" title="Conteúdo da Aula ou Revisão"></iframe>
+            </div>
+
+            <div id="switch-button-area">
+                 <button id="switch-content-btn" class="btn-custom"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer"> Professor <span>Felipe d'Avila</span> | Termodinâmica Interativa - <span id="year"></span> </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // --- Código JavaScript Revisado com Logs ---
+
+        console.log("Log 0: Script started.");
+
+        // --- DOM Element References ---
+        const loader = document.getElementById('loader');
+        const initialChoiceSection = document.getElementById('initial-choice');
+        const contentDisplaySection = document.getElementById('content-display');
+        const contentFrame = document.getElementById('content-frame');
+        const switchButtonArea = document.getElementById('switch-button-area');
+        const switchContentBtn = document.getElementById('switch-content-btn');
+        const btnAula = document.getElementById('btn-aula');
+        const btnRevisao = document.getElementById('btn-revisao');
+
+        // Check if all essential elements were found
+        if (!loader || !initialChoiceSection || !contentDisplaySection || !contentFrame || !switchButtonArea || !switchContentBtn || !btnAula || !btnRevisao) {
+            console.error("Log ERROR: Um ou mais elementos essenciais do DOM não foram encontrados! Verifique os IDs.");
+        } else {
+            console.log("Log 1: All essential elements referenced successfully.");
+        }
+
+        // --- URLs ---
+        const aulaUrl = btnAula ? btnAula.dataset.url : null;
+        const revisaoUrl = btnRevisao ? btnRevisao.dataset.url : null;
+        console.log("Log 2: Aula URL =", aulaUrl);
+        console.log("Log 3: Revisao URL =", revisaoUrl);
+
+        // --- Functions ---
+        function loadContent(urlToLoad) {
+            console.log("Log 4: loadContent called with URL:", urlToLoad);
+            if (!urlToLoad) {
+                console.error("Log ERROR: urlToLoad is invalid!");
+                return;
+            }
+
+            // 1. Hide initial choice section
+            if(initialChoiceSection) initialChoiceSection.style.display = 'none';
+            console.log("Log 5: Initial choice hidden.");
+
+            // 2. Set iframe source
+            console.log("Log 6: Setting iframe src to:", urlToLoad);
+            if(contentFrame) {
+                contentFrame.src = urlToLoad;
+
+                // Add listeners to iframe *before* setting src might be more reliable in some cases
+                contentFrame.onload = function() {
+                    console.log("Log 7: Iframe onload event fired for:", contentFrame.src);
+                    // Check if the loaded document is accessible (might indicate successful load vs. blocked page)
+                    try {
+                        // Accessing contentDocument might throw an error if cross-origin and blocked
+                        if (contentFrame.contentDocument && contentFrame.contentDocument.body && contentFrame.contentDocument.body.childNodes.length > 0) {
+                             console.log("Log 7.1: Iframe content seems accessible.");
+                        } else if (contentFrame.src !== 'about:blank') {
+                             console.warn("Log 7.2: Iframe content might be empty or blocked (X-Frame-Options?). Check Console for specific browser errors.");
+                        }
+                    } catch (e) {
+                         console.warn("Log 7.3: Cannot access iframe contentDocument (likely due to cross-origin restrictions/X-Frame-Options). Check Console.", e);
+                    }
+                };
+                contentFrame.onerror = function() {
+                    console.error("Log 8: Iframe onerror event fired for:", urlToLoad);
+                    alert("Erro ao carregar o conteúdo no iframe. Verifique o Console (F12) para detalhes.");
+                };
+
+            } else {
+                 console.error("Log ERROR: contentFrame element not found!");
+                 return; // Stop if iframe doesn't exist
+            }
+
+
+            // 3. Determine switch button details
+            let switchToUrl, switchText, switchIconClass;
+            if (urlToLoad === aulaUrl) {
+                switchToUrl = revisaoUrl;
+                switchText = " Ir para Lista de Revisão";
+                switchIconClass = "fas fa-list-check";
+            } else if (urlToLoad === revisaoUrl) {
+                switchToUrl = aulaUrl;
+                switchText = " Ir para Aula Completa";
+                switchIconClass = "fas fa-play-circle";
+            } else {
+                console.error("Log ERROR: urlToLoad does not match known URLs!");
+                switchToUrl = '#'; // Fallback
+                switchText = " Erro";
+                switchIconClass = "fas fa-exclamation-triangle";
+            }
+            console.log("Log 9: Switch button target URL =", switchToUrl);
+
+            // 4. Configure the switch button
+            if(switchContentBtn) {
+                switchContentBtn.innerHTML = `<i class="${switchIconClass}"></i>${switchText}`;
+                switchContentBtn.dataset.targetUrl = switchToUrl;
+                console.log("Log 10: Switch button configured.");
+            } else {
+                 console.error("Log ERROR: switchContentBtn element not found!");
+            }
+
+            // 5. Show content display and switch button area
+            if(contentDisplaySection) contentDisplaySection.style.display = 'block';
+            if(switchButtonArea) switchButtonArea.style.display = 'block';
+            console.log("Log 11: Content display and switch button shown.");
+
+            // Optional: Scroll
+            if(contentDisplaySection) {
+                // contentDisplaySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // --- Event Listeners ---
+        // Ensure elements exist before adding listeners
+        if (btnAula && btnRevisao && switchContentBtn) {
+            console.log("Log 12: Attaching event listeners.");
+
+            btnAula.addEventListener('click', () => {
+                console.log("Log 13: Aula button clicked.");
+                loadContent(aulaUrl);
+            });
+
+            btnRevisao.addEventListener('click', () => {
+                console.log("Log 14: Revisao button clicked.");
+                loadContent(revisaoUrl);
+            });
+
+            switchContentBtn.addEventListener('click', () => {
+                const urlToLoad = switchContentBtn.dataset.targetUrl;
+                console.log("Log 15: Switch button clicked. Attempting to load:", urlToLoad);
+                if (urlToLoad && urlToLoad !== '#') {
+                    loadContent(urlToLoad);
+                } else {
+                    console.error("Log 16: Switch button target URL is invalid or not found!", urlToLoad);
+                    alert("Erro: Não foi possível determinar o URL de destino para alternar.");
+                }
+            });
+        } else {
+            console.error("Log 17: Cannot attach event listeners because one or more button elements were not found!");
+        }
+
+        // Loader Script
+        window.addEventListener('load', () => {
+            console.log("Log 18: Window load event fired.");
+            setTimeout(() => {
+                if(loader) {
+                    loader.classList.add('hidden');
+                    console.log("Log 19: Loader hidden.");
+                } else {
+                     console.warn("Log 19.1: Loader element not found when trying to hide.");
+                }
+            }, 600);
+        });
+
+        // Particles.js Config
+        try {
+            if (typeof particlesJS !== 'undefined') { // Check if library loaded
+                particlesJS('particles-js', {"particles":{"number":{"value":60,"density":{"enable":true,"value_area":800}},"color":{"value":"#ffffff"},"shape":{"type":"circle"},"opacity":{"value":0.6,"random":true,"anim":{"enable":true,"speed":0.8,"opacity_min":0.1,"sync":false}},"size":{"value":2.5,"random":true,"anim":{"enable":false}},"line_linked":{"enable":false},"move":{"enable":true,"speed":1.5,"direction":"none","random":true,"straight":false,"out_mode":"out","bounce":false}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":false},"onclick":{"enable":false},"resize":true}},"retina_detect":true});
+                console.log("Log 20: Particles.js initialized.");
+            } else {
+                console.warn("Log 20.1: particlesJS function not found. Skipping initialization.");
+            }
+        } catch (e) {
+            console.error("Log 21: Error initializing Particles.js:", e);
+        }
+
+        // Update Year in Footer
+        try {
+            const yearElement = document.getElementById('year');
+            if (yearElement) {
+                 yearElement.textContent = new Date().getFullYear();
+                 console.log("Log 22: Footer year updated.");
+            } else {
+                 console.warn("Log 22.1: Footer year element not found.");
+            }
+        } catch (e) {
+            console.error("Log 23: Error updating footer year:", e);
+        }
+
+        console.log("Log 24: Script execution finished.");
+
+    </script>
+</body>
+</html>
