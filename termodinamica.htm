@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Aula – Gases Ideais e Termodinâmica</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; color: #222; }
+    h1, h2, h3 { color: #2E86C1; }
+    h1 { text-align: center; }
+    table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+    th, td { border: 1px solid #999; padding: 8px; text-align: center; }
+    th { background: #f0f0f0; }
+    canvas { max-width: 600px; margin: 20px auto; display: block; }
+    .section { margin-top: 40px; }
+    p.explicativo { margin: 10px 0 10px 20px; }
+  </style>
+</head>
+<body>
+<hr style="border: none; height: 4px; background-color: #333;">
+
+<h1>🎓Gases Ideais, Transformações e Termodinâmica</h1>
+<p><strong>Objetivo:</strong> Compreender o comportamento dos gases ideais, suas transformações e a relação entre trabalho, calor e energia interna através da <em>Primeira Lei da Termodinâmica</em>.</p>
+<hr style="border: none; height: 4px; background-color: #333;">
+
+<!-- Seção 1: Introdução -->
+<div class="section">
+  <h2>1. Introdução aos Gases Ideais e Modelo Cinético</h2>
+  <ul>
+    <li>"O volume resultante da soma dos volumes das moléculas constituintes de um gás em um dado recipiente é desprezível em relação ao volume desse recipiente."</li>
+    <li>"Entre as moléculas de um gás ideal, considera-se que só há interação quando elas colidem."</li>
+    <li>"O tempo médio de duração de uma colisão entre duas moléculas quaisquer de um gás é desprezível em relação ao intervalo de tempo médio para que elas colidam novamente com outras moléculas do gás."</li>
+    <li>"Todas as colisões entre as moléculas de um gás ideal, ou entre as moléculas desse gás e as paredes do recipiente em que ele se encontra, são consideradas perfeitamente elásticas."</li>
+    <li>"A energia interna de um gás ideal depende unicamente da temperatura e é inteiramente dependente da energia cinética."</li>
+
+  </ul>
+  <p class="explicativo">Além disso, vale lembrar que <strong>"volumes iguais de gases diferentes, na mesma temperatura e pressão, contêm o mesmo número de moléculas."</strong></p>
+  
+<hr style="border: none; height: 2px; background-color: #333;">
+  <p>Equação de estado: $$ PV = nRT $$</p>
+</div>
+<hr style="border: none; height: 2px; background-color: #333;">
+<hr style="border: none; height: 4px; background-color: #333;">
+
+<!-- Seção 2: Transformações Gasosas - Versão Aprimorada -->
+<div class="section">
+  <h2>2. Transformações Gasosas</h2>
+<hr style="border: none; height: 2px; background-color: #333;">
+  <!-- Card da Equação Geral -->
+  <div class="law-card">
+    <h3>⚖️ Lei Geral dos Gases</h3>
+    <div class="law-equation">
+      $$ \frac{P_1V_1}{T_1} = \frac{P_2V_2}{T_2} $$
+    </div>
+    <div class="law-details">
+      <p>Para uma massa fixa de gás ideal:</p>
+      <ul>
+        <li>\( P \) = Pressão (em qualquer unidade consistente)</li>
+        <li>\( V \) = Volume (em m³ ou L)</li>
+        <li>\( T \) = Temperatura absoluta (sempre em Kelvin)</li>
+      </ul>
+    </div>
+  </div>
+<hr style="border: none; height: 2px; background-color: #333;">
+  
+<!-- Exemplo Aplicado -->
+<div class="transformation-card" id="exemplo">
+  <h3> Exemplo Prático</h3>
+  <div class="problem">
+    <p>Balão meteorológico partindo de:</p>
+    <ul>
+    $$ V_1 = 3,0\,m^3 $$  $$ T_1 = 300\,K $$  $$ P_1 = 100.000\,Pa $$
+    </ul>
+    <p>Atinge:</p>
+    <ul>
+     $$ P_2 = 2.000\,Pa $$ $$ T_2 = 110\,K $$  $$ V_2 = ? $$
+    </ul>
+  </div>
+  <div class="solution">
+    <p>Solução: Aplicação da Lei Geral das Transformações Gasosas (Lei Combinada):</p>
+    $$ \frac{P_1V_1}{T_1} = \frac{P_2V_2}{T_2} $$
+    $$ V_2 = \frac{P_1V_1T_2}{P_2T_1} = \frac{100000 \times 3 \times 110}{2000 \times 300} = 55\,m^3 $$
+  </div>
+</div>
+  <br><br>
+  
+  <hr style="border: none; height: 2px; background-color: #333;">
+  <!-- Transformação Isotérmica -->
+  <div class="transformation-card" id="isotermica">
+    <h3>🌡️ Transformação Isotérmica (Lei de Boyle)</h3>
+    <div class="law-equation">
+      $$ P_1V_1 = P_2V_2 $$
+    </div>
+    <div class="key-points">
+      <ul>
+        <li>✅ Temperatura constante.</li>
+        <li>✅ Pressão e volume são inversamente proporcionais.</li>
+
+      </ul>
+    </div>
+    <canvas id="graficoIsotermica"></canvas>
+    <div class="practical-example">
+      <h3> Exemplo Prático</h3>
+      <p>Um gás a 2 atm ocupa 4L. Qual volume a 4 atm?</p>
+      <p class="solution">Solução: \( V_2 = \frac{P_1V_1}{P_2} = \frac{2 \times 4}{4} = 2\,L \)</p>
+    </div>
+  </div>
+<hr style="border: none; height: 2px; background-color: #333;">
+  <!-- Transformação Isobárica -->
+  <div class="transformation-card" id="isobarica">
+    <h3>📏 Transformação Isobárica (Lei de Charles)</h3>
+    <div class="law-equation">
+      $$ \frac{V_1}{T_1} = \frac{V_2}{T_2} $$
+    </div>
+    <div class="key-points">
+      <ul>
+        <li>✅ Pressão constante</li>
+        <li>✅ O volume é diretamente proporcional à temperatura.</li>
+        <li>✅ Volumes iguais de gases diferentes, na mesma temperatura inicial, quando aquecidos sob pressão constante de modo a sofrerem a mesma variação de temperatura, dilatam-se igualmente.</li>
+      </ul>
+    <canvas id="graficoIsobarica"></canvas>
+    
+    </div>
+  </div>
+<hr style="border: none; height: 2px; background-color: #333;">
+  <!-- Transformação Isocórica -->
+  <div class="transformation-card" id="isocorica">
+    <h3>🔒 Transformação Isocórica (Lei de Gay-Lussac)</h3>
+    <div class="law-equation">
+      $$ \frac{P_1}{T_1} = \frac{P_2}{T_2} $$
+    </div>
+    <div class="key-points">
+      <ul>
+        <li>✅ Volume constante</li>
+        <li>✅ Pressão e temperatura diretamente proporcionais</li>
+        <li>✅ Trabalho nulo (\( W = 0 \))</li>
+        <li>✅ Toda energia transferida é calor (\( Q = \Delta U \))</li>
+      </ul>
+    </div>
+    <canvas id="graficoIsocorica"></canvas>
+    <div class="warning">
+      <p>⚠️ Cuidado com recipientes rígidos sob aquecimento!</p>
+    </div>
+  </div>
+
+  
+  
+  <hr style="border: none; height: 2px; background-color: #333;">
+  
+  <!-- Transformação Adiabática -->
+  <div class="transformation-card" id="adiabatica">
+    <h3>⚡ Transformação Adiabática</h3>
+      <div class="key-points">
+      <ul>
+        <li>✅ Sem troca de calor (\( Q = 0 \))</li>
+        <li>✅ Processos rápidos aproximam adiabáticos</li>
+
+      </ul>
+    </div>
+    <canvas id="graficoAdiabatica"></canvas>
+    <div class="real-world">
+      <h4>Aplicações Práticas:</h4>
+      <ul>
+        <center>  <p>🔹 Congelamento do Extintor de Incêndio  🔹 Resfriamento do dedo que assopramos  🔹 Aquecimento do Pneu Enquanto Enchemos</p></center>
+      </ul>
+    </div>
+  </div>
+<hr style="border: none; height: 2px; background-color: #333;">
+  <!-- Tabela Comparativa -->
+  <div class="comparison-table">
+    <h3>📊 Resumo das Transformações</h3>
+    <table>
+      <tr><th>Tipo</th><th>Lei</th><th>Constante</th><th>Relação</th></tr>
+      <tr><td>Isotérmica</td><td>Boyle</td><td>T</td><td>P ∝ 1/V<br>A pressão é inversamente proporcional ao volume.</td></tr>
+      <tr><td>Isobárica</td><td>Charles</td><td>P</td><td>V ∝ T<br>O volume é diretamente proporcional à temperatura medida em Kelvin.</td></tr>
+      <tr><td>Isocórica</td><td>Gay-Lussac</td><td>V</td><td>P ∝ T<br>A pressão é diretamente proporcional à temperatura.</td></tr>
+    </table>
+  </div>
+</div>
+<hr style="border: none; height: 4px; background-color: #333;">
+
+<!-- Seção 3: Aplicações da Equação de Clapeyron -->
+<div class="section">
+  <h2>3. Aplicações da Equação de Clapeyron</h2>
+  
+  <p><strong>Exemplo 1 – Volume de 2 Mols:</strong></p>
+  <p class="explicativo">Para uma amostra de 2 mols, considerando R = 0,082 atm·L/(mol·K), T = 320 K e P = 5 atm, o volume ocupado pode ser calculado pela equação dos gases ideais.</p>
+  <p>$$ V = \frac{nRT}{P} = \frac{2 \times 0{,}082 \times 320}{5} \approx 10{,}5\,L $$</p>
+  
+  <p><strong>Exemplo 2 – Determinação do Número de Mols:</strong></p>
+  <p class="explicativo">Para um gás a 450 K, ocupando 100 L sob pressão de 8 atm e considerando R = 0,08 atm·L/(mol·K), o número de mols é dado por:</p>
+  <p>$$ n = \frac{PV}{RT} = \frac{8 \times 100}{0{,}08 \times 450} \approx 22{,}2\,mol $$</p>
+</div>
+
+  <hr style="border: none; height: 4px; background-color: #333;">
+
+<!-- Seção 4: Primeira Lei da Termodinâmica - Versão Aprimorada -->
+<div class="section">
+  
+  <div class="thermo-card">
+    <h2>4. Primeira Lei da Termodinâmica</h2>
+  <hr style="border: none; height: 2px; background-color: #333;">  
+    <div class="law-equation highlight">
+      $$ \Delta U = Q - W $$
+    </div>
+<hr style="border: none; height: 2px; background-color: #333;">
+    <div class="key-points">
+          <h3>🔑 Interpretação Fundamental: <strong>Convenção de Sinais</strong></h3>
+    <table>
+      <tr><th>           \( Q > 0 \) : Gás Ganha Calor
+            <br>\( Q < 0 \) : Gás Perde Calor
+                        </p></th><th>\( W > 0 \) : Gás Expande [W do Gás sobre o meio.]<br>
+              \( W < 0 \) : Gás Conntrai [W do meio sobre o gás.]
+            </th><th><p>\(ΔU > 0\) : Aquecimento do sistema
+            <br>\(ΔU < 0\) : Resfriamento do sistema
+                        </p></th></tr>
+      </table>
+      <hr style="border: none; height: 2px; background-color: #333;">
+      
+    <div class="process-breakdown">
+      <h3>🔍 Análise por Tipo de Transformação</h3>
+<hr style="border: none; height: 2px; background-color: #333;">
+      <!-- Isotérmica -->
+      <div class="process-card">
+        <h4>🌡️ Processo Isotérmico</h4>
+        <div class="law-equation">
+          $$ \Delta U = 0 \Rightarrow Q = W $$
+        </div>
+        <ul>
+          <li>Toda energia transferida como calor é convertida em trabalho</li>
+          <li>Exemplo prático: Expansão lenta de um pistão térmico</li>
+        </ul>
+      </div>
+<hr style="border: none; height: 2px; background-color: #333;">
+      <!-- Isobárica -->
+      <div class="process-card">
+        <h4>📏 Processo Isobárico</h4>
+        <div class="law-equation">
+          $$ W = P\Delta V \Rightarrow \Delta U = Q - P\Delta V $$
+        </div>
+        <ul>
+          <li>Cálculo do trabalho: \( W = 2\,atm \times (5\,L - 3\,L) = 4\,atm\cdot L \)</li>
+          <li>Aplicação: Motores de combustão interna</li>
+        </ul>
+      </div>
+<hr style="border: none; height: 2px; background-color: #333;">
+      <!-- Isocórica -->
+      <div class="process-card">
+        <h4>🔒 Processo Isocórico</h4>
+        <div class="law-equation">
+          $$ W = 0 \Rightarrow \Delta U = Q $$
+        </div>
+        <ul>
+          <li>Toda energia transferida altera diretamente a energia interna</li>
+          <li>Exemplo: Aquecimento em recipiente rígido</li>
+        </ul>
+      </div>
+<hr style="border: none; height: 2px; background-color: #333;">
+      <!-- Adiabática -->
+      <div class="process-card">
+        <h4>💨 Processo Adiabático</h4>
+        <div class="law-equation">
+          $$ Q = 0 \Rightarrow \Delta U = -W $$
+        </div>
+        <ul>
+          <li>Variação de temperatura durante expansão/compressão: Expande Resfriando, Comprime Esquentando.</li>
+          <li>Aplicação: Compressores rápidos</li>
+        </ul>
+      </div>
+    </div>
+<hr style="border: none; height: 2px; background-color: #333;">
+    <!-- Tabela Resumo -->
+    <div class="comparison-table">
+      <h3>📊 Síntese Energética</h3>
+      <table>
+        <tr><th>Processo</th><th>Q</th><th>W</th><th>ΔU</th><th>Fórmula</th></tr>
+        <tr><td>Isotérmico</td><td>≠0</td><td>≠0</td><td>0</td><td>\( Q = W \)</td></tr>
+        <tr><td>Isobárico</td><td>≠0</td><td>≠0</td><td>≠0</td><td>\( \Delta U = Q - P\Delta V \)</td></tr>
+        <tr><td>Isocórico</td><td>≠0</td><td>0</td><td>≠0</td><td>\( \Delta U = Q \)</td></tr>
+        <tr><td>Adiabático</td><td>0</td><td>≠0</td><td>≠0</td><td>\( \Delta U = -W \)</td></tr>
+      </table>
+    </div>
+<hr style="border: none; height: 2px; background-color: #333;">
+<div class="warning">
+  <h4>⚠️ Atenção!</h4>
+  <ul>
+    <li>Convenção de sinais é crucial.</li>
+    <li>Temperatura sempre em Kelvin.</li>
+    <li>Aplicável apenas a sistemas fechados.</li>
+    <li>
+      <strong>Isotérmica:</strong> Como \( pV \) é constante, temos \( \Delta U = 0 \); ou seja, o calor absorvido se converte integralmente em trabalho.
+    </li>
+    <li>
+      <strong>Isobárica:</strong> O trabalho é \( W = P\Delta V \) e \( \Delta U = Q - W \); o trabalho pode ser diferente de zero.
+    </li>
+    <li>
+      <strong>Isocórica:</strong> Com volume constante, \( W = 0 \) e \( \Delta U = Q \); o aumento da energia interna ocorre somente via transferência de calor.
+    </li>
+    <li>
+      <strong>Adiabática:</strong> Sem troca de calor (\( Q = 0 \)), temos \( \Delta U = -W \); a energia interna diminui conforme o gás realiza trabalho de expansão.
+    </li>
+  </ul>
+</div>
+
+
+<!-- Ciclos Termodinâmicos e Expansões Livres -->
+<div class="transformation-card" id="especiais">
+
+  
+<hr style="border: none; height: 4px; background-color: #333;">
+
+  <h2>5. Situações Especiais</h2>
+  
+
+  <div class="special-case"><hr style="border: none; height: 2px; background-color: #333;">
+
+
+    <h4>🔄 Ciclos Termodinâmicos</h4>
+
+    <hr style="border: none; border-top: 1px dotted #ccc;">
+    <div class="law-equation">
+      $$ ΔU = 0 $$
+    </div>
+    <div class="key-points">
+      <ul>
+        <center><b>Energia interna constante após ciclo completo pois a temperatura retorna ao valor inicial!</b></center>
+
+    </div>
+  </div>
+    
+    <hr style="border: none; border-top: 1px dotted #ccc;">
+
+ <div class="special-case"><hr style="border: none; height: 2px; background-color: #333;">
+
+  <div class="special-case">
+    <h4>💨 Expansão Livre de Joule</h4>
+
+    <hr style="border: none; border-top: 1px dotted #ccc;">
+
+  <div class="law-equation" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; text-align: center;">
+  <div>$$ \Delta U = 0 $$</div>
+  <div>$$ W = 0 $$</div> 
+  <div>$$ Q = 0 $$</div>
+</div>
+
+<div class="key-points" style="margin-top: 1rem;">
+  <!-- Conteúdo adicional aqui -->
+</div>
+      <ul>
+<center>      <strong>Clássica experiência da expansão livre de Joule: Câmara dividida com vácuo em um lado, gás no outro - ao remover a divisória, o gás se expande livremente.</strong></p></center>
+    </div>
+  </div>
+    
+    <hr style="border: none; border-top: 1px dotted #ccc;">
+    
+    
+    <div class="key-points">
+      <ul>
+      ✅ Processo irreversível em gás ideal   ✅ Nenhum trabalho realizado (W = 0)    ✅ Sem troca de calor (Q = 0)    ✅ Temperatura constante em gás ideal</li>
+      </ul>
+    </div>
+    <div class="experimental-setup">
+ <div class="special-case"><hr style="border: none; height: 2px; background-color: #333;">
+      
+    </div>
+  </div>
+<hr style="border: none; height: 4px; background-color: #333;">
+
+
+<!-- Seção 6: Resumo Final -->
+<div class="section">
+  <h2>6. Resumo Final</h2>
+  <table>
+    <tr>
+      <th>Tipo</th>
+      <th>Constante</th>
+      <th>Variações</th>
+      <th>\(\Delta U\)</th>
+      <th>Q</th>
+      <th>W</th>
+    </tr>
+    <tr>
+      <td>Isotérmica</td>
+      <td>T</td>
+      <td>P ↑ → V ↓</td>
+      <td>0</td>
+      <td>\(Q = W\)</td>
+      <td>\(W = Q\)</td>
+    </tr>
+    <tr>
+      <td>Isobárica</td>
+      <td>P</td>
+      <td>V ↑ → T ↑</td>
+      <td>\(\Delta U = Q - W\)</td>
+      <td>\(Q = W + \Delta U\)</td>
+      <td>\(W = P\Delta V\)</td>
+    </tr>
+    <tr>
+      <td>Isocórica</td>
+      <td>V</td>
+      <td>P ↑ → T ↑</td>
+      <td>\(\Delta U = Q\)</td>
+      <td>\(Q = \Delta U\)</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Adiabática</td>
+      <td>\(Q = 0\)</td>
+      <td>P ↑ → V ↓ → T ↑</td>
+      <td>\(\Delta U = -W\)</td>
+      <td>0</td>
+      <td>\(W = -\Delta U\)</td>
+    </tr>
+  </table>
+</div>
+
+<script>
+function gerarXY(func, xMin, xMax, step = 0.5) {
+  const data = [];
+  for (let x = xMin; x <= xMax; x += step) {
+    data.push({x: x, y: func(x)});
+  }
+  return data;
+}
+// Função para gerar os dados da hipérbole de forma contínua no intervalo desejado
+function gerarDadosHip(xMin, xMax, step) {
+  const data = [];
+  for (let x = xMin; x <= xMax; x += step) {
+    data.push({ x: x, y: 16 / x });
+  }
+  return data;
+}
+
+new Chart(document.getElementById("graficoIsotermica"), {
+  type: 'scatter',
+  data: {
+    datasets: [{
+      label: 'Hipérbole Equilátera: P × V',
+      data: gerarDadosHip(2, 8, 0.1),
+      borderColor: 'blue',
+      fill: false,
+      showLine: true,
+      pointRadius: 2
+    }]
+  },
+  options: {
+    scales: {
+      x: {
+        title: { display: true, text: 'Volume' },
+        min: 2,
+        max: 8,
+        // Se desejar, ajuste o stepSize para o eixo X também (opcional)
+        ticks: { stepSize: 1 }
+      },
+      y: {
+        title: { display: true, text: 'Pressão' },
+        min: 2,
+        max: 8,
+        ticks: {
+          stepSize: 2,
+          autoSkip: false,
+          callback: function(value) { return value; }
+        }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById("graficoIsobarica"), {
+  type: 'line',
+  data: { 
+    labels: [200, 250, 300, 350, 400, 450, 500],
+    datasets: [{ label: 'V/T', data: [20,25,30,35,40,45,50], borderColor: 'green', fill: false }]
+  },
+  options: {scales: {x: {title: {display: true, text: 'T (K)'}}, y: {title: {display: true, text: 'V (L)'}}}}
+});
+new Chart(document.getElementById("graficoIsocorica"), {
+  type: 'line',
+  data: { 
+    labels: [200, 250, 300, 350, 400, 450, 500],
+    datasets: [{ label: 'P/T', data: [1,1.25,1.5,1.75,2,2.25,2.5], borderColor: 'orange', fill: false }]
+  },
+  options: {scales: {x: {title: {display: true, text: 'T (K)'}}, y: {title: {display: true, text: 'P (atm)'}}}}
+});
+new Chart(document.getElementById("graficoAdiabatica"), {
+  type: 'scatter',
+  data: { datasets: [{label: 'Adiabática', data: gerarXY(x => 1/Math.pow(x, 1.4), 1, 10), borderColor: 'red', fill: false, showLine: true}]},
+  options: {scales: {x: {title: {display: true, text: 'Volume'}}, y: {title: {display: true, text: 'Pressão'}}}}
+});
+</script>
+
+</body>
+</html>
+
+<hr style="border: none; height: 4px; background-color: #333;">
