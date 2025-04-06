@@ -525,43 +525,73 @@
              </div>
          </section>
 
-        <section id="scoring">
-            <div class="container">
-                <h2 class="section-title">Sistema de Pontuação Justo e Motivador</h2>
-                <div class="scoring-content">
-                    <div>
-                        <h3>Base da Pontuação Individual</h3>
-                        <div class="formula-block">
-                            <p>A pontuação de cada aluno em um ciclo é a soma dos pontos obtidos em:</p>
-                            <ul>
-                                <li><strong>Tarefas:</strong> Pontuação acumulada nas semanas A e B do ciclo (Máx. 20 pontos/ciclo).</li>
-                                <li><strong>Simulados:</strong> Nota obtida no simulado correspondente ao período (Máx. 60 pontos/simulado, quando aplicável).</li>
-                            </ul>
-                             <p> $ P_{\text{Individual}} = P_{\text{Tarefas (A+B)}} + P_{\text{Simulado (se houver)}} $ </p>
-                        </div>
-                     </div>
+          <!-- INÍCIO DA SEÇÃO 4 CORRIGIDA -->
+  <section id="scoring">
+    <div class="container">
+      <h2 class="section-title">Sistema de Pontuação Justo e Inteligente</h2>
+      <div class="scoring-content">
+        <div>
+          <h3>4.1 Pontuação Individual</h3>
+          <div class="formula-block">
+            <p>Cada aluno acumula pontos com base em duas frentes:</p>
+            <ul>
+              <li><strong>Tarefas semanais:</strong> Máximo de <strong>20 pontos</strong> por ciclo (Semanas A e B).</li>
+              <li><strong>Simulado (quando aplicável):</strong> Convertido para até <strong>60 pontos</strong> via média harmônica.</li>
+            </ul>
+            <p style="text-align: center;">
+              $$ P_{\text{Individual}} = P_{\text{Tarefas (A+B)}} + P_{\text{Simulado final}} $$
+            </p>
+          </div>
 
-                     <div>
-                        <h3>Valorizando o Coletivo: Média da Turma</h3>
-                        <div class="formula-block">
-                            <p>Calculamos a média da turma usando a Média Harmonizada Ponderada para dar peso justo a cada aluno e reduzir o impacto de notas muito discrepantes:</p>
-                             <p> $ \text{MédiaHarm}_{\text{Turma}} = \frac{\sum_{i=1}^{N} (P_{\text{Individual}_i} \times w_i)}{\sum_{i=1}^{N} w_i} $ </p>
-                             <p><small>Onde $P_{\text{Individual}_i}$ é a nota do aluno $i$ e $w_i$ é seu peso (normalmente 1).</small></p>
-                        </div>
-                    </div>
+          <div class="formula-block">
+            <p><strong>Média Harmônica:</strong> considera a regularidade entre disciplinas:</p>
+            <p style="text-align: center;">
+              $$ P_{\text{Simulado}} = \frac{n}{\frac{1}{N_1} + \frac{1}{N_2} + \cdots + \frac{1}{N_n}} $$
+            </p>
+            <p>Após o cálculo, ela é convertida para a escala 0-60:</p>
+            <p style="text-align: center;">
+              $$ P_{\text{Simulado final}} = \left( \frac{P_{\text{Simulado}}}{10} \right) \cdot 60 $$
+            </p>
+            <p><em>Exemplo: se a média harmônica for 7.2, o valor convertido será 43.2 pontos.</em></p>
+          </div>
+        </div>
 
-                     <div>
-                        <h3>Pontuação Final no Ciclo: Esforço + Colaboração</h3>
-                        <div class="formula-block">
-                            <p>A nota final de cada aluno na Gincana, a cada ciclo de premiação, combina o desempenho próprio com o resultado da turma:</p>
-                            <p> $ \text{NotaFinal}_{\text{Gincana}} = (0.9 \times P_{\text{Individual}}) + (0.1 \times \text{MédiaHarm}_{\text{Turma}}) $ </p>
-                            <p><strong>Resultado:</strong> 90% do mérito vem do esforço individual e 10% reflete o desempenho colaborativo da turma.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div>
+          <h3>4.2 Valorizando a Turma: Consistência Coletiva</h3>
+          <div class="formula-block">
+            <p>A média da turma é calculada pela média aritmética das pontuações individuais:</p>
+            <p style="text-align: center;">
+              $$ \text{Média Aritmética} = \frac{\sum_{i=1}^{n} P_{\text{Individual}, i}}{n} $$
+            </p>
+            <p><small>Essa métrica também contribui na pontuação final do aluno.</small></p>
+          </div>
+        </div>
 
+        <div>
+          <h3>4.3 Pontuação Final do Aluno na Gincana</h3>
+          <div class="formula-block">
+            <p>Combinamos esforço próprio com o resultado coletivo:</p>
+            <p style="text-align: center;">
+              $$ \text{Pontuação Gincana} = 0.9 \cdot P_{\text{Individual}} + 0.1 \cdot \text{Média Aritmética} $$
+            </p>
+            <p><strong>Impacto:</strong> O aluno é incentivado a se empenhar sem abrir mão do trabalho em equipe.</p>
+          </div>
+        </div>
+
+        <div>
+          <h3>4.4 Pontuação Final da Turma</h3>
+          <div class="formula-block">
+            <p>Reflete o desempenho coletivo da turma:</p>
+            <p style="text-align: center;">
+              $$ \text{Pontuação da Turma} = \frac{\sum_{i=1}^{n} \text{Pontuação Gincana}_i}{n} $$
+            </p>
+            <p>Serve como base para premiações entre turmas, reforçando a competição saudável.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- FIM DA SEÇÃO 4 CORRIGIDA -->
         <section id="timeline" style="background-color: var(--color-light-bg);">
             <div class="container">
                 <h2 class="section-title">Cronograma Detalhado 2025</h2>
