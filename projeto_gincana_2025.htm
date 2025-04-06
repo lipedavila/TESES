@@ -466,35 +466,77 @@
             </div>
         </section>
 
-        <section id="introduction">
-            <div class="container">
-                <h2 class="section-title">Por Que Uma Gincana da Aprendizagem?</h2>
-                <div class="card-grid">
-                    <div class="card">
-                        <div class="icon"><i class="fas fa-rocket"></i></div>
-                        <h3>Engajamento Contínuo</h3>
-                        <p>Mantém os alunos motivados durante todo o ano letivo com metas claras, feedback constante e reconhecimento.</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon"><i class="fas fa-bullseye"></i></div>
-                        <h3>Foco em Resultados</h3>
-                        <p>Estruturada para reforçar o aprendizado, preparar para avaliações (como o ENEM) e acompanhar o progresso individual e coletivo.</p>
-                    </div>
-                    <div class="card">
-                        <div class="icon"><i class="fas fa-users"></i></div>
-                        <h3>Colaboração e Equipe</h3>
-                        <p>Incentiva o apoio mútuo dentro das turmas, onde o sucesso individual contribui para o reconhecimento do grupo.</p>
-                    </div>
-                     <div class="card">
-                        <div class="icon"><i class="fas fa-lightbulb"></i></div>
-                        <h3>Inovação Pedagógica</h3>
-                        <p>Alinha gamificação e metodologias ativas aos objetivos pedagógicos do Anglo Camboriú, de forma dinâmica e eficaz.</p>
-                    </div>
+       <!-- INÍCIO: Seção "Por Que Uma Gincana da Aprendizagem?" com textos de apoio -->
+    <style>
+        @media (max-width: 768px) {
+            #introduction .card-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        .support-text {
+            display: block;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f1f9ff;
+            border-left: 4px solid #00A896;
+            border-radius: 6px;
+            color: #333;
+            font-size: 0.95rem;
+        }
+    </style>
+    <section id="introduction">
+        <div class="container">
+            <h2 class="section-title">Por Que Uma Gincana da Aprendizagem?</h2>
+            <div class="card-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; justify-items: center;">
+                <div class="card">
+                    <div class="icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Engajamento Contínuo</h3>
+                    <p>Mantém os alunos motivados durante todo o ano letivo com metas claras, feedback constante e reconhecimento.</p>
+                </div>
+                <div class="card">
+                    <div class="icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Foco em Resultados</h3>
+                    <p>Estruturada para reforçar o aprendizado, preparar para avaliações (como o ENEM) e acompanhar o progresso individual e coletivo.</p>
+                </div>
+                <div class="card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h3>Colaboração e Equipe</h3>
+                    <p>Incentiva o apoio mútuo dentro das turmas, onde o sucesso individual contribui para o reconhecimento do grupo.</p>
+                </div>
+                <div class="card">
+                    <div class="icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Inovação Pedagógica</h3>
+                    <p>Alinha gamificação e metodologias ativas aos objetivos pedagógicos do Anglo Camboriú, de forma dinâmica e eficaz.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+    <!-- FIM: Seção "Por Que Uma Gincana da Aprendizagem?" -->
 
-         <section id="mechanics" style="background-color: #e7f0f7;">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('#introduction .card');
+            const messages = [
+                `A motivação constante é um gatilho positivo para manter os alunos focados e progredindo. O reconhecimento frequente gera dopamina educacional — criando laços positivos com o ato de aprender.`,
+                `Resultados devem ser construídos com base na evolução constante. Ao combinar tarefas com simulados, a gincana reforça o sentido de progresso real — visível e valorizado.`,
+                `O modelo 90% individual + 10% coletivo premia a colaboração sem penalizar o esforço próprio. Assim, a cultura de equipe é estimulada com apoio mútuo, e não com dependência.`,
+                `A pedagogia positiva se fortalece com práticas ativas. A gincana transforma a avaliação em experiência, o conteúdo em missão, e o desempenho em narrativa de superação.`
+            ];
+
+            cards.forEach((card, index) => {
+                card.addEventListener('click', () => {
+                    const existing = card.querySelector('.support-text');
+                    document.querySelectorAll('.support-text').forEach(p => p.remove());
+                    if (!existing) {
+                        const p = document.createElement('div');
+                        p.classList.add('support-text');
+                        p.innerText = messages[index];
+                        card.appendChild(p);
+                    }
+                });
+            });
+        });
+    </script>         <section id="mechanics" style="background-color: #e7f0f7;">
              <div class="container">
                 <h2 class="section-title">Como Funciona?</h2>
                 <p style="text-align: center; max-width: 800px; margin: -2rem auto 3rem auto; color: var(--color-text-muted);">
@@ -525,13 +567,13 @@
              </div>
          </section>
 
-          <!-- INÍCIO DA SEÇÃO 4 CORRIGIDA -->
+  <!-- INÍCIO DA SEÇÃO 4 CORRIGIDA -->
   <section id="scoring">
     <div class="container">
       <h2 class="section-title">Sistema de Pontuação Justo e Inteligente</h2>
       <div class="scoring-content">
         <div>
-          <h3>4.1 Pontuação Individual</h3>
+          <h3>Pontuação Individual</h3>
           <div class="formula-block">
             <p>Cada aluno acumula pontos com base em duas frentes:</p>
             <ul>
@@ -557,7 +599,7 @@
         </div>
 
         <div>
-          <h3>4.2 Valorizando a Turma: Consistência Coletiva</h3>
+          <h3>Valorizando a Turma: Consistência Coletiva</h3>
           <div class="formula-block">
             <p>A média da turma é calculada pela média aritmética das pontuações individuais:</p>
             <p style="text-align: center;">
@@ -568,7 +610,7 @@
         </div>
 
         <div>
-          <h3>4.3 Pontuação Final do Aluno na Gincana</h3>
+          <h3>Pontuação Final do Aluno na Gincana</h3>
           <div class="formula-block">
             <p>Combinamos esforço próprio com o resultado coletivo:</p>
             <p style="text-align: center;">
@@ -579,7 +621,7 @@
         </div>
 
         <div>
-          <h3>4.4 Pontuação Final da Turma</h3>
+          <h3>Pontuação Final da Turma</h3>
           <div class="formula-block">
             <p>Reflete o desempenho coletivo da turma:</p>
             <p style="text-align: center;">
