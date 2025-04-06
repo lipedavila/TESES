@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposta: Gincana da Aprendizagem 2025 - Anglo Camboriú</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+        </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+
+    <style>
+        /* CSS Reset/Normalization (Simplified) */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-background);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 0.75em;
+            line-height: 1.2;
+        }
+        a { color: var(--color-accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        img { max-width: 100%; display: block; }
+        section {
+            padding: 4rem 1rem;
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(20px); /* Initial state for animation */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Animation */
+        }
+        section.visible { /* State when section is in view */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+
+        /* Color Palette & Theme Variables */
+        :root {
+            --color-primary: #005792; /* Deep Blue */
+            --color-secondary: #00A896; /* Teal/Green */
+            --color-accent: #FDB44B; /* Yellow/Gold */
+            --color-background: #F8F9FA; /* Very Light Gray */
+            --color-light-bg: #FFFFFF; /* White */
+            --color-text: #343A40; /* Dark Gray */
+            --color-text-muted: #6C757D; /* Medium Gray */
+            --color-border: #DEE2E6; /* Light Border Gray */
+
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Roboto', sans-serif;
+
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 10px rgba(0,0,0,0.08);
+            --border-radius: 8px;
+        }
+
+        /* Header */
+        .app-header {
+            background-color: var(--color-light-bg);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-logo {
+            font-family: var(--font-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+        .header-logo span { color: var(--color-secondary); } /* Optional accent */
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: var(--color-light-bg);
+            text-align: center;
+            padding: 6rem 1rem;
+            opacity: 1; /* Hero visible by default */
+            transform: translateY(0);
+        }
+        #hero h1 {
+            color: var(--color-light-bg);
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5em;
+        }
+        #hero .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 1.5rem auto;
+        }
+        .cta-button {
+             display: inline-block;
+             background-color: var(--color-accent);
+             color: var(--color-primary);
+             padding: 0.8rem 1.8rem;
+             border-radius: 50px; /* Pill shape */
+             font-weight: 600;
+             font-family: var(--font-primary);
+             transition: all 0.3s ease;
+             box-shadow: var(--shadow-sm);
+             border: none;
+             cursor: pointer;
+        }
+        .cta-button:hover {
+            background-color: #ffc107; /* Lighter yellow on hover */
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        /* Underline effect */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--color-accent);
+            border-radius: 2px;
+        }
+
+        /* Card Styling */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background-color: var(--color-light-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .card .icon {
+            font-size: 3rem;
+            color: var(--color-secondary);
+            margin-bottom: 1rem;
+        }
+        .card h3 {
+            font-size: 1.3rem;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+        .card p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Mechanics Section Styling */
+         #mechanics .mechanics-flow {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .flow-step {
+            text-align: center;
+            max-width: 200px;
+        }
+        .flow-step .icon {
+             font-size: 2.5rem;
+             color: var(--color-primary);
+             background-color: #e7f0f7; /* Light blue bg for icon */
+             width: 70px;
+             height: 70px;
+             border-radius: 50%;
+             display: inline-flex;
+             justify-content: center;
+             align-items: center;
+             margin-bottom: 1rem;
+             box-shadow: var(--shadow-sm);
+        }
+         .flow-step h4 {
+            font-size: 1.1rem;
+            color: var(--color-primary);
+            margin-bottom: 0.3rem;
+         }
+         .flow-step p {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+         }
+
+        /* Scoring Section */
+        #scoring .scoring-content {
+            display: grid;
+            grid-template-columns: 1fr; /* Adjust later if needed */
+            gap: 2rem;
+            background-color: var(--color-light-bg);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+        #scoring h3 {
+             margin-bottom: 1.5rem;
+             text-align: left;
+             border-left: 4px solid var(--color-secondary);
+             padding-left: 1rem;
+        }
+        #scoring .formula-block {
+             margin-bottom: 1.5rem;
+             padding: 1rem;
+             background-color: #f1f3f5; /* Slightly different bg for formula */
+             border-radius: 4px;
+             border-left: 3px solid var(--color-accent);
+        }
+        #scoring .formula-block p { margin-bottom: 0.5rem; }
+        #scoring .formula-block strong { color: var(--color-primary); }
+
+
+        /* Timeline Section */
+         #timeline .calendar-controls {
+            text-align: center;
+            margin-bottom: 2rem;
+         }
+         #timeline .month-button {
+             background-color: var(--color-light-bg);
+             border: 1px solid var(--color-border);
+             color: var(--color-primary);
+             padding: 0.6rem 1.2rem;
+             margin: 0.3rem;
+             border-radius: 50px;
+             cursor: pointer;
+             font-weight: 500;
+             transition: background-color 0.3s, color 0.3s;
+         }
+         #timeline .month-button:hover,
+         #timeline .month-button.active {
+             background-color: var(--color-primary);
+             color: var(--color-light-bg);
+             border-color: var(--color-primary);
+         }
+         .calendar-container {
+             background-color: var(--color-light-bg);
+             padding: 1.5rem;
+             border-radius: var(--border-radius);
+             box-shadow: var(--shadow-md);
+             overflow-x: auto; /* For smaller screens */
+             display: none; /* Hidden by default, shown by JS */
+             animation: fadeIn 0.5s ease; /* Add fade-in */
+         }
+         @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+         }
+
+         .calendar-container.active {
+             display: block; /* Show active calendar */
+         }
+         /* --- CALENDAR TABLE STYLES --- */
+         #timeline table {
+            border-collapse: collapse;
+            width: 100%;
+            min-width: 600px; /* Prevent excessive squishing */
+            margin: 0 auto;
+            font-size: 0.9rem;
+            table-layout: fixed; /* Ensure columns are equal width */
+         }
+         #timeline th,
+         #timeline td {
+            border: 1px solid var(--color-border);
+            text-align: center;
+            padding: 0.5rem 0.2rem; /* Adjusted padding */
+            width: 14.285%;
+            vertical-align: top;
+            position: relative;
+            height: 90px; /* Consistent height */
+         }
+         #timeline th {
+            background-color: #e9ecef; /* Slightly darker header */
+            font-weight: 600;
+            font-family: var(--font-primary);
+            color: var(--color-primary);
+            padding: 0.8rem 0.4rem;
+            height: auto; /* Header height auto */
+         }
+         #timeline td {
+            background-color: var(--color-light-bg);
+         }
+         /* Style for empty cells (days from prev/next month) */
+         #timeline td.empty-cell { /* Use a specific class for empty cells */
+             background-color: #f8f9fa;
+             cursor: default;
+         }
+         #timeline td.empty-cell > * { display: none; } /* Hide content in empty cells */
+
+         /* Styling the day number */
+         #timeline .day-number {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--color-primary);
+            margin-bottom: 0.3rem;
+            display: block;
+         }
+          /* Styling the info text within cells */
+         #timeline .info {
+             font-size: 0.7rem; /* Slightly smaller */
+             color: var(--color-text-muted);
+             line-height: 1.25;
+             padding: 0 2px; /* Add slight horizontal padding */
+             display: block; /* Ensure it takes block space */
+             margin-top: 0.2rem;
+             word-wrap: break-word; /* Prevent long text overflow */
+             max-height: 4.5em; /* Limit height to prevent overflow */
+             overflow: hidden;
+         }
+
+         /* --- HIGHLIGHT STYLES --- */
+         #timeline .inicio-trisemana {
+            background-color: #FFFDE7; /* Very Light Yellow */
+            border: 1px solid #FBC02D; /* Gold/Yellow border */
+         }
+         #timeline .inicio-trisemana .day-number { color: #F57F17; }
+         #timeline .inicio-trisemana .info { color: #795548; font-weight: 500; }
+
+         #timeline .premiacao {
+            background-color: #E8F5E9; /* Very Light Green */
+            border: 1px solid #2E7D32; /* Dark Green border */
+            position: relative; /* For potential badge */
+         }
+         #timeline .premiacao .day-number { color: #1B5E20; }
+         #timeline .premiacao .info { color: #1B5E20; font-weight: 500;}
+
+         #timeline .ferias {
+            background-color: #EDE7F6; /* Very Light Purple */
+            border: 1px solid #5E35B1; /* Purple border */
+         }
+         #timeline .ferias .day-number { color: #4527A0; }
+         #timeline .ferias .info { color: #4527A0; font-weight: 500; }
+
+         /* --- LEGEND --- */
+         .calendar-legend {
+             text-align: center;
+             margin-top: 2rem;
+             font-size: 0.9rem;
+             color: var(--color-text-muted);
+             display: flex; flex-wrap: wrap;
+             justify-content: center;
+             gap: 1rem 1.5rem; /* Row and column gap */
+         }
+        .legend-item { display: inline-flex; align-items: center;}
+        .legend-color-box {
+             width: 15px; height: 15px;
+             margin-right: 0.5rem;
+             border: 1px solid #ccc;
+             border-radius: 3px;
+             vertical-align: middle;
+             display: inline-block;
+         }
+
+
+        /* Footer */
+        .app-footer {
+            background-color: var(--color-primary);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            /* Ensure footer is visible */
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .app-footer p { margin: 0.3rem 0;}
+        .app-footer a { color: var(--color-accent); }
+
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            #hero h1 { font-size: 2.5rem; }
+            #hero .subtitle { font-size: 1.1rem; }
+            .section-title { font-size: 1.8rem; }
+            section { padding: 3rem 0.5rem; }
+            .container { padding: 0 0.5rem; }
+            .card-grid { grid-template-columns: 1fr; }
+             #mechanics .mechanics-flow { flex-direction: column; align-items: center; }
+             .mechanics-flow > .flow-step:not(:last-child) { padding-right: 0; }
+             #timeline th, #timeline td {
+                 padding: 0.3rem 0.1rem;
+                 font-size: 0.75rem;
+                 height: 75px;
+             }
+             #timeline .day-number { font-size: 0.85rem; margin-bottom: 0.1rem;}
+             #timeline .info { font-size: 0.6rem; line-height: 1.1;}
+             #timeline table { min-width: initial; } /* Allow table to shrink */
+        }
+         @media (max-width: 480px) {
+             #timeline th, #timeline td { height: 65px; }
+             #timeline .info { display: none; } /* Hide info on very small screens */
+             #timeline .day-number { margin-bottom: 0; position: relative; top: 50%; transform: translateY(-50%);} /* Center number when info hidden */
+             #timeline .month-button { padding: 0.5rem 0.8rem; font-size: 0.8rem; margin: 0.2rem;}
+             .calendar-legend { font-size: 0.8rem; gap: 0.5rem 1rem; }
+             .legend-item { margin-bottom: 0.5rem;}
+         }
+
+    </style>
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="container header-content">
+            <div class="header-logo">Anglo<span>Camboriú</span></div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1>Gincana da Aprendizagem 2025</h1>
+                <p class="subtitle">Uma iniciativa inovadora para engajar alunos, promover a colaboração e celebrar o conhecimento no Anglo Camboriú.</p>
+                <a href="#introduction" class="cta-button">Conheça a Proposta <i class="fas fa-arrow-down" style="margin-left: 8px;"></i></a>
+            </div>
+        </section>
+
+        <section id="introduction">
+            <div class="container">
+                <h2 class="section-title">Por Que Uma Gincana da Aprendizagem?</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="icon"><i class="fas fa-rocket"></i></div>
+                        <h3>Engajamento Contínuo</h3>
+                        <p>Mantém os alunos motivados durante todo o ano letivo com metas claras, feedback constante e reconhecimento.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon"><i class="fas fa-bullseye"></i></div>
+                        <h3>Foco em Resultados</h3>
+                        <p>Estruturada para reforçar o aprendizado, preparar para avaliações (como o ENEM) e acompanhar o progresso individual e coletivo.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon"><i class="fas fa-users"></i></div>
+                        <h3>Colaboração e Equipe</h3>
+                        <p>Incentiva o apoio mútuo dentro das turmas, onde o sucesso individual contribui para o reconhecimento do grupo.</p>
+                    </div>
+                     <div class="card">
+                        <div class="icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Inovação Pedagógica</h3>
+                        <p>Alinha gamificação e metodologias ativas aos objetivos pedagógicos do Anglo Camboriú, de forma dinâmica e eficaz.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <section id="mechanics" style="background-color: #e7f0f7;">
+             <div class="container">
+                <h2 class="section-title">Como Funciona?</h2>
+                <p style="text-align: center; max-width: 800px; margin: -2rem auto 3rem auto; color: var(--color-text-muted);">
+                    A gincana opera em ciclos trissemanais de Abril a Novembro, combinando tarefas regulares com avaliações periódicas e premiações estratégicas.
+                </p>
+                 <div class="mechanics-flow">
+                     <div class="flow-step">
+                         <div class="icon"><i class="fas fa-calendar-alt"></i></div>
+                         <h4>Ciclos Trissemanais</h4>
+                         <p>Períodos de 3 semanas (A, B, C) para organização das atividades e pontuações.</p>
+                     </div>
+                     <div class="flow-step">
+                         <div class="icon"><i class="fas fa-tasks"></i></div>
+                         <h4>Tarefas Semanais</h4>
+                         <p>Atividades regulares valendo pontos por prazo e qualidade (computadas nas semanas A e B).</p>
+                     </div>
+                     <div class="flow-step">
+                        <div class="icon"><i class="fas fa-clipboard-check"></i></div>
+                        <h4>Simulados Periódicos</h4>
+                        <p>Avaliações baseadas nas áreas do ENEM, medindo desempenho e evolução.</p>
+                    </div>
+                     <div class="flow-step">
+                         <div class="icon"><i class="fas fa-award"></i></div>
+                         <h4>Premiações</h4>
+                         <p>Reconhecimento das tarefas (Semana C) e premiações maiores após os simulados.</p>
+                     </div>
+                 </div>
+             </div>
+         </section>
+
+        <section id="scoring">
+            <div class="container">
+                <h2 class="section-title">Sistema de Pontuação Justo e Motivador</h2>
+                <div class="scoring-content">
+                    <div>
+                        <h3>Base da Pontuação Individual</h3>
+                        <div class="formula-block">
+                            <p>A pontuação de cada aluno em um ciclo é a soma dos pontos obtidos em:</p>
+                            <ul>
+                                <li><strong>Tarefas:</strong> Pontuação acumulada nas semanas A e B do ciclo (Máx. 20 pontos/ciclo).</li>
+                                <li><strong>Simulados:</strong> Nota obtida no simulado correspondente ao período (Máx. 60 pontos/simulado, quando aplicável).</li>
+                            </ul>
+                             <p> $ P_{\text{Individual}} = P_{\text{Tarefas (A+B)}} + P_{\text{Simulado (se houver)}} $ </p>
+                        </div>
+                     </div>
+
+                     <div>
+                        <h3>Valorizando o Coletivo: Média da Turma</h3>
+                        <div class="formula-block">
+                            <p>Calculamos a média da turma usando a Média Harmonizada Ponderada para dar peso justo a cada aluno e reduzir o impacto de notas muito discrepantes:</p>
+                             <p> $ \text{MédiaHarm}_{\text{Turma}} = \frac{\sum_{i=1}^{N} (P_{\text{Individual}_i} \times w_i)}{\sum_{i=1}^{N} w_i} $ </p>
+                             <p><small>Onde $P_{\text{Individual}_i}$ é a nota do aluno $i$ e $w_i$ é seu peso (normalmente 1).</small></p>
+                        </div>
+                    </div>
+
+                     <div>
+                        <h3>Pontuação Final no Ciclo: Esforço + Colaboração</h3>
+                        <div class="formula-block">
+                            <p>A nota final de cada aluno na Gincana, a cada ciclo de premiação, combina o desempenho próprio com o resultado da turma:</p>
+                            <p> $ \text{NotaFinal}_{\text{Gincana}} = (0.9 \times P_{\text{Individual}}) + (0.1 \times \text{MédiaHarm}_{\text{Turma}}) $ </p>
+                            <p><strong>Resultado:</strong> 90% do mérito vem do esforço individual e 10% reflete o desempenho colaborativo da turma.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline" style="background-color: var(--color-light-bg);">
+            <div class="container">
+                <h2 class="section-title">Cronograma Detalhado 2025</h2>
+                <p style="text-align:center; margin-top:-2rem; margin-bottom:2rem; color: var(--color-text-muted);">Clique nos meses para visualizar o calendário correspondente.</p>
+                <div class="calendar-controls">
+                    <button class="month-button" data-month="abril">Abril</button>
+                    <button class="month-button" data-month="maio">Maio</button>
+                    <button class="month-button" data-month="junho">Junho</button>
+                    <button class="month-button" data-month="julho">Julho</button>
+                    <button class="month-button" data-month="agosto">Agosto</button>
+                    <button class="month-button" data-month="setembro">Setembro</button>
+                    <button class="month-button" data-month="outubro">Outubro</button>
+                    <button class="month-button" data-month="novembro">Novembro</button>
+                </div>
+
+                <div id="calendar-abril" class="calendar-container">
+                    <h3 style="text-align:center; margin-bottom: 1rem;">Abril de 2025</h3>
+                    <table>
+                       <thead>
+                         <tr><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th><th>Dom</th></tr>
+                       </thead>
+                       <tbody>
+                         <tr><td class="empty-cell"></td><td><span class="day-number">1</span></td><td><span class="day-number">2</span></td><td><span class="day-number">3</span></td><td><span class="day-number">4</span></td><td><span class="day-number">5</span></td><td><span class="day-number">6</span></td></tr>
+                         <tr><td><span class="day-number">7</span></td><td><span class="day-number">8</span></td><td><span class="day-number">9</span></td><td><span class="day-number">10</span></td><td><span class="day-number">11</span></td><td><span class="day-number">12</span></td><td><span class="day-number">13</span></td></tr>
+                         <tr><td><span class="day-number">14</span></td><td><span class="day-number">15</span></td><td><span class="day-number">16</span></td><td><span class="day-number">17</span></td><td><span class="day-number">18</span></td><td><span class="day-number">19</span></td><td><span class="day-number">20</span></td></tr>
+                         <tr><td class="inicio-trisemana"><span class="day-number">21</span><div class="info">Início T1 (A)</div></td><td><span class="day-number">22</span></td><td><span class="day-number">23</span></td><td><span class="day-number">24</span></td><td><span class="day-number">25</span></td><td><span class="day-number">26</span></td><td><span class="day-number">27</span></td></tr>
+                         <tr><td><span class="day-number">28</span></td><td><span class="day-number">29</span></td><td><span class="day-number">30</span></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                       </tbody>
+                     </table>
+                </div>
+
+                <div id="calendar-maio" class="calendar-container">
+                    <h3 style="text-align:center; margin-bottom: 1rem;">Maio de 2025</h3>
+                    <table>
+                       <thead>
+                          <tr><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th><th>Dom</th></tr>
+                       </thead>
+                       <tbody>
+                         <tr><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td><span class="day-number">1</span></td><td><span class="day-number">2</span></td><td><span class="day-number">3</span></td><td><span class="day-number">4</span></td></tr>
+                         <tr><td><span class="day-number">5</span></td><td><span class="day-number">6</span></td><td class="premiacao"><span class="day-number">7</span><div class="info">Premiação T1<br>Analisa: 21-27/04 e 28/04-04/05</div></td><td><span class="day-number">8</span></td><td><span class="day-number">9</span></td><td><span class="day-number">10</span></td><td><span class="day-number">11</span></td></tr>
+                         <tr><td class="inicio-trisemana"><span class="day-number">12</span><div class="info">Início T2 (A)</div></td><td><span class="day-number">13</span></td><td><span class="day-number">14</span></td><td><span class="day-number">15</span></td><td><span class="day-number">16</span></td><td><span class="day-number">17</span></td><td><span class="day-number">18</span></td></tr>
+                         <tr><td><span class="day-number">19</span></td><td><span class="day-number">20</span></td><td><span class="day-number">21</span></td><td><span class="day-number">22</span></td><td><span class="day-number">23</span></td><td><span class="day-number">24</span></td><td><span class="day-number">25</span></td></tr>
+                         <tr><td><span class="day-number">26</span></td><td><span class="day-number">27</span></td><td class="premiacao"><span class="day-number">28</span><div class="info">Premiação T2<br>Analisa: 12-18/05 e 19-25/05</div></td><td><span class="day-number">29</span></td><td><span class="day-number">30</span></td><td><span class="day-number">31</span></td><td class="empty-cell"></td></tr>
+                       </tbody>
+                     </table>
+               </div>
+
+                <div id="calendar-junho" class="calendar-container">
+                    <h3 style="text-align:center; margin-bottom: 1rem;">Junho de 2025</h3>
+                    <table>
+                       <thead>
+                          <tr><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th><th>Dom</th></tr>
+                       </thead>
+                       <tbody>
+                         <tr><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td><span class="day-number">1</span></td></tr> <tr><td><span class="day-number">2</span><div class="info">Início T3 (A)*</div></td><td><span class="day-number">3</span></td><td><span class="day-number">4</span></td><td><span class="day-number">5</span></td><td><span class="day-number">6</span></td><td><span class="day-number">7</span></td><td><span class="day-number">8</span></td></tr> <tr><td><span class="day-number">9</span></td><td><span class="day-number">10</span></td><td><span class="day-number">11</span></td><td><span class="day-number">12</span></td><td><span class="day-number">13</span></td><td><span class="day-number">14</span></td><td><span class="day-number">15</span></td></tr>
+                         <tr><td><span class="day-number">16</span></td><td><span class="day-number">17</span></td><td class="premiacao"><span class="day-number">18</span><div class="info">Premiação T3<br>Analisa: 02-08/06 e 09-15/06</div></td><td><span class="day-number">19</span></td><td><span class="day-number">20</span></td><td><span class="day-number">21</span></td><td><span class="day-number">22</span></td></tr>
+                         <tr><td class="inicio-trisemana"><span class="day-number">23</span><div class="info">Início T4 (A)</div></td><td><span class="day-number">24</span></td><td><span class="day-number">25</span></td><td><span class="day-number">26</span></td><td><span class="day-number">27</span></td><td><span class="day-number">28</span></td><td><span class="day-number">29</span></td></tr>
+                         <tr><td><span class="day-number">30</span></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                       </tbody>
+                     </table>
+                     <p style="font-size: 0.8rem; text-align: right; margin-top: 0.5rem;">*Início da Trisemana 3 na primeira segunda-feira do mês.</p>
+               </div>
+
+                <div id="calendar-julho" class="calendar-container">
+                    <h3 style="text-align:center; margin-bottom: 1rem;">Julho de 2025</h3>
+                    <table>
+                       <thead>
+                          <tr><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th><th>Dom</th></tr>
+                       </thead>
+                       <tbody>
+                         <tr><td class="empty-cell"></td><td><span class="day-number">1</span></td><td><span class="day-number">2</span></td><td><span class="day-number">3</span></td><td><span class="day-number">4</span></td><td><span class="day-number">5</span></td><td><span class="day-number">6</span></td></tr>
+                         <tr><td><span class="day-number">7</span></td><td><span class="day-number">8</span></td><td class="premiacao"><span class="day-number">9</span><div class="info">Premiação T4<br>Analisa: 23-29/06 e 30/06-06/07</div></td><td><span class="day-number">10</span></td><td><span class="day-number">11</span></td><td><span class="day-number">12</span></td><td><span class="day-number">13</span></td></tr> <tr><td class="ferias"><span class="day-number">14</span><div class="info">(Férias)</div></td><td class="ferias"><span class="day-number">15</span><div class="info">(Férias)</div></td><td class="ferias"><span class="day-number">16</span><div class="info">(Férias)</div></td><td class="ferias"><span class="day-number">17</span><div class="info">(Férias)</div></td><td class="ferias"><span class="day-number">18</span><div class="info">(Férias)</div></td><td class="ferias"><span class="day-number">19</span><div class="info">(Férias)</div></td><td class="ferias"><span class="day-number">20</span><div class="info">(Férias)</div></td></tr>
+                         <tr><td class="ferias"><span class="day-number">21</span><div class="info">(Férias)</div></td><td class="ferias"><span class="day-number">22</span><div class="info">(Férias)</div></td><td class="ferias"><span class="day-number">23</span><div class="info">(Férias)</div></td><td class="ferias"><span class="day-number">24</span><div class="info">(Férias)</div></td><td class="ferias"><span class="day-number">25</span><div class="info">(Férias)</div></td><td class="ferias"><span class="day-number">26</span><div class="info">(Férias)</div></td><td class="ferias"><span class="day-number">27</span><div class="info">(Férias)</div></td></tr>
+                         <tr><td class="inicio-trisemana"><span class="day-number">28</span><div class="info">Início T5 (A)</div></td><td><span class="day-number">29</span></td><td><span class="day-number">30</span></td><td><span class="day-number">31</span></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                       </tbody>
+                     </table>
+               </div>
+
+                <div id="calendar-agosto" class="calendar-container">
+                    <h3 style="text-align:center; margin-bottom: 1rem;">Agosto de 2025</h3>
+                    <table>
+                       <thead>
+                         <tr><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th><th>Dom</th></tr>
+                       </thead>
+                       <tbody>
+                         <tr><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td><span class="day-number">1</span></td><td><span class="day-number">2</span></td><td><span class="day-number">3</span></td></tr>
+                         <tr><td><span class="day-number">4</span></td><td><span class="day-number">5</span></td><td><span class="day-number">6</span></td><td><span class="day-number">7</span></td><td><span class="day-number">8</span></td><td><span class="day-number">9</span></td><td><span class="day-number">10</span></td></tr>
+                         <tr><td><span class="day-number">11</span></td><td><span class="day-number">12</span></td><td><span class="day-number">13</span></td><td class="premiacao"><span class="day-number">14</span><div class="info">Premiação T5<br>Analisa: 28/07-03/08 e 04-10/08</div></td><td><span class="day-number">15</span></td><td><span class="day-number">16</span></td><td><span class="day-number">17</span></td></tr> <tr><td class="inicio-trisemana"><span class="day-number">18</span><div class="info">Início T6 (A)</div></td><td><span class="day-number">19</span></td><td><span class="day-number">20</span></td><td><span class="day-number">21</span></td><td><span class="day-number">22</span></td><td><span class="day-number">23</span></td><td><span class="day-number">24</span></td></tr>
+                         <tr><td><span class="day-number">25</span></td><td><span class="day-number">26</span></td><td><span class="day-number">27</span></td><td><span class="day-number">28</span></td><td><span class="day-number">29</span></td><td><span class="day-number">30</span></td><td><span class="day-number">31</span></td></tr>
+                       </tbody>
+                   </table>
+               </div>
+
+                <div id="calendar-setembro" class="calendar-container">
+                    <h3 style="text-align:center; margin-bottom: 1rem;">Setembro de 2025</h3>
+                   <table>
+                       <thead>
+                         <tr><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th><th>Dom</th></tr>
+                       </thead>
+                       <tbody>
+                         <tr><td><span class="day-number">1</span></td><td><span class="day-number">2</span></td><td class="premiacao"><span class="day-number">3</span><div class="info">Premiação T6<br>Analisa: 18-24/08 e 25-31/08</div></td><td><span class="day-number">4</span></td><td><span class="day-number">5</span></td><td><span class="day-number">6</span></td><td><span class="day-number">7</span></td></tr>
+                         <tr><td class="inicio-trisemana"><span class="day-number">8</span><div class="info">Início T7 (A)</div></td><td><span class="day-number">9</span></td><td><span class="day-number">10</span></td><td><span class="day-number">11</span></td><td><span class="day-number">12</span></td><td><span class="day-number">13</span></td><td><span class="day-number">14</span></td></tr>
+                         <tr><td><span class="day-number">15</span></td><td><span class="day-number">16</span></td><td><span class="day-number">17</span></td><td><span class="day-number">18</span></td><td><span class="day-number">19</span></td><td><span class="day-number">20</span></td><td><span class="day-number">21</span></td></tr>
+                         <tr><td><span class="day-number">22</span></td><td><span class="day-number">23</span></td><td class="premiacao"><span class="day-number">24</span><div class="info">Premiação T7<br>Analisa: 08-14/09 e 15-21/09</div></td><td><span class="day-number">25</span></td><td><span class="day-number">26</span></td><td><span class="day-number">27</span></td><td><span class="day-number">28</span></td></tr>
+                         <tr><td class="inicio-trisemana"><span class="day-number">29</span><div class="info">Início T8 (A)</div></td><td><span class="day-number">30</span></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                       </tbody>
+                     </table>
+               </div>
+
+                <div id="calendar-outubro" class="calendar-container">
+                    <h3 style="text-align:center; margin-bottom: 1rem;">Outubro de 2025</h3>
+                    <table>
+                       <thead>
+                         <tr><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th><th>Dom</th></tr>
+                       </thead>
+                       <tbody>
+                         <tr><td class="empty-cell"></td><td class="empty-cell"></td><td><span class="day-number">1</span></td><td><span class="day-number">2</span></td><td><span class="day-number">3</span></td><td><span class="day-number">4</span></td><td><span class="day-number">5</span></td></tr>
+                         <tr><td><span class="day-number">6</span></td><td><span class="day-number">7</span></td><td><span class="day-number">8</span></td><td><span class="day-number">9</span></td><td><span class="day-number">10</span></td><td><span class="day-number">11</span></td><td><span class="day-number">12</span></td></tr>
+                         <tr><td><span class="day-number">13</span></td><td><span class="day-number">14</span></td><td class="premiacao"><span class="day-number">15</span><div class="info">Premiação T8<br>Analisa: 29/09-05/10 e 06-12/10</div></td><td><span class="day-number">16</span></td><td><span class="day-number">17</span></td><td><span class="day-number">18</span></td><td><span class="day-number">19</span></td></tr>
+                         <tr><td class="inicio-trisemana"><span class="day-number">20</span><div class="info">Início T9 (A)</div></td><td><span class="day-number">21</span></td><td><span class="day-number">22</span></td><td><span class="day-number">23</span></td><td><span class="day-number">24</span></td><td><span class="day-number">25</span></td><td><span class="day-number">26</span></td></tr>
+                         <tr><td><span class="day-number">27</span></td><td><span class="day-number">28</span></td><td><span class="day-number">29</span></td><td><span class="day-number">30</span></td><td><span class="day-number">31</span></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                       </tbody>
+                   </table>
+               </div>
+
+                <div id="calendar-novembro" class="calendar-container">
+                    <h3 style="text-align:center; margin-bottom: 1rem;">Novembro de 2025</h3>
+                    <table>
+                       <thead>
+                          <tr><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th><th>Dom</th></tr>
+                       </thead>
+                       <tbody>
+                         <tr><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td><span class="day-number">1</span></td><td><span class="day-number">2</span></td></tr>
+                         <tr><td><span class="day-number">3</span></td><td><span class="day-number">4</span></td><td class="premiacao"><span class="day-number">5</span><div class="info">Premiação T9<br>Analisa: 20-26/10 e 27/10-02/11</div></td><td><span class="day-number">6</span></td><td><span class="day-number">7</span></td><td><span class="day-number">8</span></td><td><span class="day-number">9</span></td></tr>
+                         <tr><td><span class="day-number">10</span></td><td><span class="day-number">11</span></td><td><span class="day-number">12</span></td><td><span class="day-number">13</span></td><td><span class="day-number">14</span></td><td><span class="day-number">15</span></td><td><span class="day-number">16</span></td></tr>
+                         <tr><td><span class="day-number">17</span></td><td><span class="day-number">18</span></td><td><span class="day-number">19</span></td><td><span class="day-number">20</span></td><td><span class="day-number">21</span></td><td><span class="day-number">22</span></td><td><span class="day-number">23</span></td></tr>
+                         <tr><td><span class="day-number">24</span></td><td><span class="day-number">25</span></td><td><span class="day-number">26</span></td><td><span class="day-number">27</span></td><td><span class="day-number">28</span></td><td><span class="day-number">29</span></td><td><span class="day-number">30</span></td></tr>
+                       </tbody>
+                     </table>
+               </div>
+
+               <div class="calendar-legend">
+                    <span class="legend-item"><span class="legend-color-box" style="background-color: #FFFDE7; border-color: #FBC02D;"></span> Início Trisemana</span>
+                    <span class="legend-item"><span class="legend-color-box" style="background-color: #E8F5E9; border-color: #2E7D32;"></span> Premiação</span>
+                    <span class="legend-item"><span class="legend-color-box" style="background-color: #EDE7F6; border-color: #5E35B1;"></span> Férias</span>
+                </div>
+                <p style="text-align:center; font-style:italic; margin-top: 1rem; font-size: 0.85rem; color: var(--color-text-muted);">
+                    <small>
+                    Obs.: Datas de início de trisemana (geralmente Segundas) e premiações (geralmente Quartas/Quintas) podem ser ajustadas para sincronizar com feriados e simulados oficiais.
+                    </small>
+                </p>
+            </div>
+        </section>
+
+        <section id="awards">
+           <div class="container">
+               <h2 class="section-title">Reconhecimento e Celebração</h2>
+                <p style="text-align: center; max-width: 800px; margin: -2rem auto 3rem auto; color: var(--color-text-muted);">
+                   A gincana celebra o esforço e a evolução em marcos importantes, culminando em uma premiação final significativa e de baixo custo.
+                </p>
+               <div class="card-grid"> <div class="card">
+                       <div class="icon"><i class="fas fa-medal"></i></div>
+                       <h3>1ª Sub-Premiação</h3>
+                       <p>Após o 1º Simulado (~Junho). Foco nas primeiras tarefas e desempenho inicial.</p>
+                   </div>
+                   <div class="card">
+                       <div class="icon"><i class="fas fa-chart-line"></i></div>
+                       <h3>2ª Sub-Premiação</h3>
+                       <p>Após o 2º Simulado (~Setembro). Valoriza a evolução e a constância nas tarefas.</p>
+                   </div>
+                   <div class="card">
+                       <div class="icon"><i class="fas fa-trophy"></i></div>
+                       <h3>Premiação Final</h3>
+                       <p>Após o 3º Simulado (~Novembro). Consolida todo o desempenho do ano.</p>
+                   </div>
+                    <div class="card">
+                       <div class="icon"><i class="fas fa-gift"></i></div>
+                       <h3>Tipos de Prêmios</h3>
+                       <p>Certificados digitais/impressos, quadro de honra, troféus simbólicos, "Dia do Poder" - reconhecimentos motivadores e sem custo adicional para a instituição.</p>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+        <section id="benefits" style="background-color: #e7f0f7;">
+            <div class="container">
+                <h2 class="section-title">Benefícios Estratégicos</h2>
+                <ul style="list-style: none; padding-left: 0; max-width: 700px; margin: 0 auto;">
+                    <li style="display: flex; align-items: center; margin-bottom: 1rem; background: var(--color-light-bg); padding: 1rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                        <i class="fas fa-check-circle" style="color: var(--color-secondary); font-size: 1.5rem; margin-right: 1rem;"></i>
+                        <span>Melhora significativa no desempenho acadêmico e na preparação para vestibulares.</span>
+                    </li>
+                    <li style="display: flex; align-items: center; margin-bottom: 1rem; background: var(--color-light-bg); padding: 1rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                        <i class="fas fa-check-circle" style="color: var(--color-secondary); font-size: 1.5rem; margin-right: 1rem;"></i>
+                        <span>Aumento comprovado do engajamento e da participação ativa dos alunos nas aulas e atividades.</span>
+                    </li>
+                     <li style="display: flex; align-items: center; margin-bottom: 1rem; background: var(--color-light-bg); padding: 1rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                        <i class="fas fa-check-circle" style="color: var(--color-secondary); font-size: 1.5rem; margin-right: 1rem;"></i>
+                        <span>Fortalecimento do espírito de equipe e da cultura colaborativa entre os estudantes.</span>
+                    </li>
+                    <li style="display: flex; align-items: center; margin-bottom: 1rem; background: var(--color-light-bg); padding: 1rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                        <i class="fas fa-check-circle" style="color: var(--color-secondary); font-size: 1.5rem; margin-right: 1rem;"></i>
+                        <span>Projeção de uma imagem inovadora e focada em resultados para o Anglo Camboriú.</span>
+                    </li>
+                    <li style="display: flex; align-items: center; margin-bottom: 1rem; background: var(--color-light-bg); padding: 1rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                        <i class="fas fa-check-circle" style="color: var(--color-secondary); font-size: 1.5rem; margin-right: 1rem;"></i>
+                        <span>Implementação eficiente e de baixo custo, utilizando recursos internos.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="next-steps">
+            <div class="container" style="text-align: center;">
+                <h2 class="section-title">Próximos Passos</h2>
+                <p style="max-width: 700px; margin: -2rem auto 2rem auto; color: var(--color-text-muted);">
+                    Estamos à disposição para discutir esta proposta em detalhes, realizar os ajustes necessários conforme o calendário oficial de simulados e feriados, e dar início à Gincana da Aprendizagem em Abril de 2025.
+                </p>
+                <p style="font-weight: 600; color: var(--color-primary); margin-bottom: 0.5rem;">Coordenação Pedagógica - Anglo Camboriú</p>
+                <p style="color: var(--color-text-muted;">[Nome do Coordenador(a) Responsável]</p>
+                <p style="margin-top: 1.5rem;">
+                    <a href="#hero" class="cta-button">Voltar ao Topo</a>
+                </p>
+            </div>
+        </section>
+
+   </main>
+
+    <footer class="app-footer">
+        <div class="container">
+            <p>&copy; 2025 Anglo Camboriú. Todos os direitos reservados.</p>
+            <p>Proposta da Gincana da Aprendizagem desenvolvida pela Equipe Pedagógica.</p>
+            <p><a href="https://www.anglocamboriu.com.br" target="_blank" rel="noopener noreferrer">www.anglocamboriu.com.br</a></p> </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Calendar Tab/Accordion Logic ---
+            const buttons = document.querySelectorAll('.month-button');
+            const calendars = document.querySelectorAll('.calendar-container');
+
+            function deactivateAll() {
+                calendars.forEach(cal => cal.classList.remove('active'));
+                buttons.forEach(btn => btn.classList.remove('active'));
+            }
+
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const month = button.dataset.month;
+                    const targetCalendar = document.getElementById(`calendar-${month}`);
+
+                    if (targetCalendar) {
+                        if (button.classList.contains('active')) {
+                             deactivateAll(); // Hide if clicking active button again
+                        } else {
+                            deactivateAll(); // Hide others
+                            targetCalendar.classList.add('active'); // Show target
+                            button.classList.add('active'); // Highlight button
+                        }
+                    }
+                });
+            });
+
+             // Activate April by default on load
+             const firstButton = document.querySelector('.month-button[data-month="abril"]');
+             if (firstButton) {
+                 // Use setTimeout to ensure rendering completes before activating
+                 setTimeout(() => { firstButton.click(); }, 100);
+             }
+
+             // --- Intersection Observer for Section Animations ---
+             const sections = document.querySelectorAll('section[id]');
+
+             const observerOptions = {
+                 root: null,
+                 rootMargin: '0px',
+                 threshold: 0.1 // Adjust threshold as needed (0.1 means 10% visible)
+             };
+
+             const observerCallback = (entries, observer) => {
+                 entries.forEach(entry => {
+                     if (entry.isIntersecting) {
+                         entry.target.classList.add('visible');
+                         // Optional: stop observing after the animation triggers once
+                         // observer.unobserve(entry.target);
+                     } else {
+                         // Optional: remove 'visible' class if you want the animation to replay when scrolling back up
+                         // entry.target.classList.remove('visible');
+                     }
+                 });
+             };
+
+             const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+             sections.forEach(section => {
+                 // Exclude hero section from initial hidden state if desired
+                 if (section.id !== 'hero') {
+                    observer.observe(section);
+                 }
+             });
+        });
+    </script>
+
+</body>
+</html>
